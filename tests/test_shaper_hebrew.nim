@@ -191,6 +191,35 @@ proc shapeGids(fontBytes: seq[uint8], text: string): seq[uint32] =
   for i in 0 ..< b.len:
     result.add(b.info[i].glyphId)
 
+proc shapeRunDir(fontBytes: seq[uint8], text: string,
+    d: Direction): Buffer =
+  # Shapes one bidi run with an explicit direction, the ex05 pattern.
+  let f = parseFont(fontBytes)
+  var sf = newShaperFont(f)
+  result = newBuffer()
+  result.pushStr(text)
+  result.setDirection(d)
+  sf.shape(result, @[])
+
+proc visualGlyphs(fontBytes: seq[uint8],
+    text: string): seq[tuple[gid, cluster: uint32]] =
+  # Shapes each visualRuns run with its own direction and concatenates
+  # the runs in visual order, mapping run-relative clusters back to
+  # paragraph bytes.
+  let vt = visualRuns(text, bdAuto)
+  result = @[]
+  for run in vt.runs:
+    var srcMin = text.len
+    var srcMax = -1
+    for j in run.first ..< run.last:
+      if j < vt.map.len - 1:
+        srcMin = min(srcMin, vt.map[j])
+        srcMax = max(srcMax, vt.map[j])
+    let b = shapeRunDir(fontBytes, text[srcMin .. srcMax], run.dir)
+    for i in 0 ..< b.len:
+      result.add((gid: b.info[i].glyphId,
+        cluster: b.info[i].cluster + uint32(srcMin)))
+
 test "shaper routing matches harfrust categorize":
   check categorizeShaper(some(Hebrew), true) == skHebrew
   check categorizeShaper(some(Arabic), true) == skArabic
@@ -279,3 +308,28 @@ test "latin composition is unaffected by the hebrew path":
     (0x00E9u16, 3u16)])
   let fontBytes = buildFontRaw(baseTables(cmap))
   check shapeGids(fontBytes, "\u0065\u0301") == @[3u32]
+
+test "hebrew latin mixed runs shape with per-run direction":
+  # a(10) c(11); BET(20) PATAH(21) SHEVA(22) METEG(23).
+  let cmap = buildCmap(@[(0x0061u16, 10u16), (0x0063u16, 11u16),
+    (0x05D1u16, 20u16), (0x05B7u16, 21u16), (0x05B0u16, 22u16),
+    (0x05BDu16, 23u16)])
+  let fontBytes = buildFontRaw(baseTables(cmap))
+  # Bytes: a@0 BET@1 PATAH@3 SHEVA@5 METEG@7 c@9.
+  let text = "a\u05D1\u05B7\u05B0\u05BDc"
+  let vt = visualRuns(text, bdAuto)
+  check vt.runs.len == 3
+  check vt.runs[0].level == 0
+  check vt.runs[1].level == 1
+  check vt.runs[2].level == 0
+  check vt.runs[0].dir == dirLeftToRight
+  check vt.runs[1].dir == dirRightToLeft
+  check vt.runs[2].dir == dirLeftToRight
+  # The RTL run reorders to SHEVA METEG PATAH BET (visual order)
+  # while the Latin runs stay in logical order. Grapheme clustering
+  # merges the base plus marks into the run start byte, so every
+  # Hebrew glyph maps back to paragraph byte 1.
+  check visualGlyphs(fontBytes, text) == @[(gid: 10u32, cluster: 0u32),
+    (gid: 22u32, cluster: 1u32), (gid: 23u32, cluster: 1u32),
+    (gid: 21u32, cluster: 1u32), (gid: 20u32, cluster: 1u32),
+    (gid: 11u32, cluster: 9u32)]

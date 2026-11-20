@@ -193,7 +193,7 @@ proc buildGsubArab(features: seq[tuple[tag: string, fromGid, toGid: uint16]]): s
   var loff = 2 + n * 2
   for i in 0 ..< n:
     result.putU16(uint16(loff))
-    loff += 8 + subSizes[i]
+    loff += subSizes[i]
   for i, f in features:
     result.putU16(1u16)
     result.putU16(9u16)
@@ -420,3 +420,84 @@ test "non-win1256 font keeps base glyphs":
   check b.len == 2
   check b.info[0].glyphId == 198u32
   check b.info[1].glyphId == 198u32
+
+proc shapeRunDir(fontBytes: seq[uint8], text: string,
+    d: Direction): Buffer =
+  # Shapes one bidi run with an explicit direction, the ex05 pattern.
+  let f = parseFont(fontBytes)
+  var sf = newShaperFont(f)
+  result = newBuffer()
+  result.pushStr(text)
+  result.setDirection(d)
+  sf.shape(result, @[])
+
+proc visualGlyphs(fontBytes: seq[uint8],
+    text: string): seq[tuple[gid, cluster: uint32]] =
+  # Shapes each visualRuns run with its own direction and concatenates
+  # the runs in visual order, mapping run-relative clusters back to
+  # paragraph bytes.
+  let vt = visualRuns(text, bdAuto)
+  result = @[]
+  for run in vt.runs:
+    var srcMin = text.len
+    var srcMax = -1
+    for j in run.first ..< run.last:
+      if j < vt.map.len - 1:
+        srcMin = min(srcMin, vt.map[j])
+        srcMax = max(srcMax, vt.map[j])
+    let b = shapeRunDir(fontBytes, text[srcMin .. srcMax], run.dir)
+    for i in 0 ..< b.len:
+      result.add((gid: b.info[i].glyphId,
+        cluster: b.info[i].cluster + uint32(srcMin)))
+
+test "arabic latin mixed runs join inside the rtl run":
+  # a(10) c(11); BEH(20) with init(21) medi(22) fina(23) isol(24).
+  let cmap = buildCmap(@[(0x0061u16, 10u16), (0x0063u16, 11u16),
+    (0x0628u16, 20u16)])
+  let gsub = buildGsubArab(@[("init", 20u16, 21u16),
+    ("medi", 20u16, 22u16), ("fina", 20u16, 23u16),
+    ("isol", 20u16, 24u16)])
+  var tables = baseTables(cmap)
+  tables.add(("GSUB", gsub))
+  let fontBytes = buildFontRaw(tables)
+  # Bytes: a@0 BEH@1 BEH@3 c@5.
+  let text = "a\u0628\u0628c"
+  let vt = visualRuns(text, bdAuto)
+  check vt.runs.len == 3
+  check vt.runs[0].level == 0
+  check vt.runs[1].level == 1
+  check vt.runs[2].level == 0
+  check vt.runs[1].dir == dirRightToLeft
+  # Logical BEH BEH join to init plus fina, then reverse to visual
+  # order; each letter keeps its own cluster, unlike base plus mark.
+  check visualGlyphs(fontBytes, text) == @[(gid: 10u32, cluster: 0u32),
+    (gid: 23u32, cluster: 3u32), (gid: 21u32, cluster: 1u32),
+    (gid: 11u32, cluster: 5u32)]
+
+test "arabic and hebrew runs keep their own shapers":
+  # a(10) b(11) c(12); BEH(20) with joining forms; BET(30) SHEVA(31).
+  let cmap = buildCmap(@[(0x0061u16, 10u16), (0x0062u16, 11u16),
+    (0x0063u16, 12u16), (0x0628u16, 20u16), (0x05D1u16, 30u16),
+    (0x05B0u16, 31u16)])
+  let gsub = buildGsubArab(@[("init", 20u16, 21u16),
+    ("medi", 20u16, 22u16), ("fina", 20u16, 23u16),
+    ("isol", 20u16, 24u16)])
+  var tables = baseTables(cmap)
+  tables.add(("GSUB", gsub))
+  let fontBytes = buildFontRaw(tables)
+  # Bytes: a@0 BEH@1 b@3 BET@4 SHEVA@6 c@8.
+  let text = "a\u0628b\u05D1\u05B0c"
+  let vt = visualRuns(text, bdAuto)
+  check vt.runs.len == 5
+  check vt.runs[0].level == 0
+  check vt.runs[1].level == 1
+  check vt.runs[2].level == 0
+  check vt.runs[3].level == 1
+  check vt.runs[4].level == 0
+  # The lone BEH takes the isol form through the arabic shaper while
+  # the Hebrew run reverses to SHEVA BET; the mark merges into the
+  # base cluster.
+  check visualGlyphs(fontBytes, text) == @[(gid: 10u32, cluster: 0u32),
+    (gid: 24u32, cluster: 1u32), (gid: 11u32, cluster: 3u32),
+    (gid: 31u32, cluster: 4u32), (gid: 30u32, cluster: 4u32),
+    (gid: 12u32, cluster: 8u32)]
