@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="800" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Hangul: jamo compose into syllables</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">AppleGothic at 280px: three conjoining jamo become one syllable glyph.</text>
+<text x="90" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">conjoining jamo in, one syllable out</text>
+<rect x="175" y="170" width="100" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="225" y="196" font-size="14" fill="#22223b" text-anchor="middle">U+1112</text>
+<text x="225" y="216" font-size="11" fill="#8d99ae" text-anchor="middle">HIEUH</text>
+<rect x="287" y="170" width="100" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="337" y="196" font-size="14" fill="#22223b" text-anchor="middle">U+1161</text>
+<text x="337" y="216" font-size="11" fill="#8d99ae" text-anchor="middle">A</text>
+<rect x="399" y="170" width="100" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="449" y="196" font-size="14" fill="#22223b" text-anchor="middle">U+11AB</text>
+<text x="449" y="216" font-size="11" fill="#8d99ae" text-anchor="middle">NIEUN</text>
+<line x1="325" y1="250" x2="325" y2="330" stroke="#ff8500" stroke-width="2.5" marker-end="url(#arrCluster)"/>
+<text x="345" y="295" font-size="14" fill="#ff8500" text-anchor="start">compose</text>
+<path d="M324.4 494.4 Q324.4 481.8 315.2 474.3 Q304.6 465.6 284.7 465.6 Q264.2 465.6 253.6 473.2 Q243.2 480.7 243.2 492.2 Q243.2 505.4 254.2 512.1 Q265.4 518.8 285.0 518.8 Q305.4 518.8 316.0 510.4 Q324.4 503.4 324.4 494.4 Z M424.1 619.0 L330.0 617.6 L241.6 618.2 L241.8 590.2 L240.7 551 L244.1 551 Q252.5 551 258.1 551.8 Q263.7 552.7 263.7 555.8 Q263.7 556.6 262.8 560.0 Q262 563.0 262 565.6 L262 601.1 Q267.6 601.1 275.4 601.1 Q283.6 601.1 294.2 601.4 Q304.6 601.7 314.4 601.7 Q324.4 601.7 334.2 602.0 Q360.8 602.0 383.5 601.7 Q406.2 601.4 424.1 600.8 Z M343.8 492.5 Q343.8 510.7 328.9 521.9 Q314.1 532.8 285.2 532.8 Q254.7 532.8 239.6 521.3 Q224.8 509.6 224.8 490.8 Q224.8 470.1 243.2 460 Q250.8 455.5 260.9 453.6 Q271.0 451.6 283.6 451.6 Q311.6 451.6 327.5 462.8 Q343.8 474 343.8 492.5 Z M447.6 491.4 L409.3 491.4 L408.7 547.4 Q408.7 552.1 408.7 556.3 Q408.7 560.2 409.6 565.3 L389.1 566.4 L389.4 374.3 Q396.7 374.3 404.0 375.2 Q411.8 376 411.8 378.8 Q411.8 379.6 410.7 383 Q409.6 386.1 409.6 388.9 L408.7 419.7 L409 473.2 L447.6 473.7 Z M366.4 436.2 Q356.9 435.6 349.4 435.6 Q341.8 435.4 336.2 435.1 Q318.8 434.5 305.1 434.2 Q291.7 434.0 281.6 434.0 Q262.8 434.0 242.7 434.2 Q222.5 434.5 205.7 435.1 L205.7 418.8 Q213.8 419.1 223.6 419.4 Q233.4 419.4 245.2 420.0 Q257.0 420.2 265.6 420.5 Q274.3 420.5 280.5 420.5 Q307.6 420.5 328.9 420.2 Q350.2 420.0 366.4 419.4 Z M317.7 401.2 Q310.7 400.6 302.3 400.4 Q294.2 400.1 286.1 400.1 L250.8 400.9 L250.8 384.7 L286.4 385.2 L317.7 384.7 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="185" cy="600" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="185" y1="662" x2="465" y2="662" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="325" y="688" font-size="14" fill="#22223b" text-anchor="middle">gid 4861 cluster 0</text>
+<text x="620" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">precomposed 한글 for comparison</text>
+<line x1="620" y1="600" x2="1230" y2="600" stroke="#d00000" stroke-width="2"/>
+<rect x="665" y="375" width="243" height="244" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M784.4 494.4 Q784.4 481.8 775.2 474.3 Q764.6 465.6 744.7 465.6 Q724.2 465.6 713.6 473.2 Q703.2 480.7 703.2 492.2 Q703.2 505.4 714.2 512.1 Q725.4 518.8 745.0 518.8 Q765.4 518.8 776.0 510.4 Q784.4 503.4 784.4 494.4 Z M884.1 619.0 L790.0 617.6 L701.6 618.2 L701.8 590.2 L700.7 551 L704.1 551 Q712.5 551 718.1 551.8 Q723.7 552.7 723.7 555.8 Q723.7 556.6 722.8 560.0 Q722 563.0 722 565.6 L722 601.1 Q727.6 601.1 735.4 601.1 Q743.6 601.1 754.2 601.4 Q764.6 601.7 774.4 601.7 Q784.4 601.7 794.2 602.0 Q820.8 602.0 843.5 601.7 Q866.2 601.4 884.1 600.8 Z M803.8 492.5 Q803.8 510.7 788.9 521.9 Q774.1 532.8 745.2 532.8 Q714.7 532.8 699.6 521.3 Q684.8 509.6 684.8 490.8 Q684.8 470.1 703.2 460 Q710.8 455.5 720.9 453.6 Q731.0 451.6 743.6 451.6 Q771.6 451.6 787.5 462.8 Q803.8 474 803.8 492.5 Z M907.6 491.4 L869.3 491.4 L868.7 547.4 Q868.7 552.1 868.7 556.3 Q868.7 560.2 869.6 565.3 L849.1 566.4 L849.4 374.3 Q856.7 374.3 864.0 375.2 Q871.8 376 871.8 378.8 Q871.8 379.6 870.7 383 Q869.6 386.1 869.6 388.9 L868.7 419.7 L869 473.2 L907.6 473.7 Z M826.4 436.2 Q816.9 435.6 809.4 435.6 Q801.8 435.4 796.2 435.1 Q778.8 434.5 765.1 434.2 Q751.7 434.0 741.6 434.0 Q722.8 434.0 702.7 434.2 Q682.5 434.5 665.7 435.1 L665.7 418.8 Q673.8 419.1 683.6 419.4 Q693.4 419.4 705.2 420.0 Q717.0 420.2 725.6 420.5 Q734.3 420.5 740.5 420.5 Q767.6 420.5 788.9 420.2 Q810.2 420.0 826.4 419.4 Z M777.7 401.2 Q770.7 400.6 762.3 400.4 Q754.2 400.1 746.1 400.1 L710.8 400.9 L710.8 384.7 L746.4 385.2 L777.7 384.7 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="645" cy="600" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="645" y1="662" x2="925" y2="662" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="785" y="688" font-size="14" fill="#22223b" text-anchor="middle">gid 4861</text>
+<text x="785" y="710" font-size="14" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<rect x="941" y="385" width="247" height="236" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M1152.9 620.4 L1137.5 620.4 Q1079 619.6 1067.2 619.6 Q1040.9 619.6 1019.6 619.9 Q998.6 620.2 978.8 621 L979.3 603.9 L978.8 560.8 L1067.8 560.8 Q1079.8 560.8 1089.1 560.8 Q1098.3 560.5 1105.3 560.2 Q1112.0 560.0 1117.9 559.7 Q1123.8 559.4 1129.1 559.1 L1129.1 532.5 L1065.8 532.8 Q1044.8 532.8 1021.6 533.4 Q998.6 533.9 979.0 534.5 L979.0 517.1 L1066.4 518.0 Q1086.3 518.0 1107.6 517.7 Q1128.8 517.4 1146.8 516.8 L1147.0 574.5 L1068.9 574.8 Q1055.8 574.8 1045.4 574.8 Q1035.0 574.8 1026.9 575.1 Q1018.8 575.4 1011.2 575.6 Q1004.0 575.6 997.0 576.2 L997.0 604.2 L1065.6 604.2 Q1095.8 604.2 1116.5 603.9 Q1137.5 603.6 1152.9 603.1 Z M1187.9 495.3 L1167.5 495.3 Q1091.9 494.4 1078.7 494.4 Q1067.0 494.4 1056.3 494.2 Q1046.0 493.9 1035.6 493.6 L941.8 493.6 L941.8 479.0 Q958.6 479.6 979.3 479.9 Q1000.3 480.2 1024.1 480.2 L1121 479.9 L1129.7 440.1 Q1131.1 432.3 1132.2 425 Q1133.6 417.4 1134.2 410.7 Q1134.4 408.5 1134.4 406.0 Q1134.7 403.2 1135 400.1 L1060.2 400.4 Q1032.5 400.4 1010.4 400.9 Q988.3 401.5 968.7 402.3 L968.7 385.5 L1043.2 386.1 L1156.3 384.7 Q1155.7 390.3 1155.2 395.0 Q1154.6 399.5 1154.0 403.2 Q1152.6 413.8 1151.0 423.0 Q1149.6 432 1147.6 440.1 L1139.2 479.0 L1187.9 478.2 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="925" cy="600" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="925" y1="662" x2="1205" y2="662" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="1065" y="688" font-size="14" fill="#22223b" text-anchor="middle">gid 2803</text>
+<text x="1065" y="710" font-size="14" fill="#ff8500" text-anchor="middle">cluster 3</text>
+<text x="620" y="750" font-size="14" fill="#22223b" text-anchor="start">First gid matches the composed jamo: U+1112 U+1161 U+11AB and U+D55C converge.</text>
+<text x="48" y="778" font-size="13" fill="#8d99ae" text-anchor="start">The Hangul shaper composes LV and LVT syllables from jamo before GSUB runs.</text>
+</svg>

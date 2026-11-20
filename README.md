@@ -69,6 +69,26 @@ for i in 0 ..< buf.len:
     " off=", buf.pos[i].xOffset, ",", buf.pos[i].yOffset
 ```
 
+## Example posters
+
+`examples/` holds Nim programs that shape real text and draw the
+result as fixed size SVG guides with big stroked glyphs. Regenerate
+them with `clue task examples` (see `examples/README.md`).
+
+| Description | Preview |
+|---|---|
+| **Anatomy of shaped text.** "AV" at 560px: baseline, hhea ascender and descender, origins, advance arrows, scaled extents, byte clusters. | <img src="examples/out/ex01_anatomy.svg" width="640"> |
+| **Kerning.** "AV" and "To" with kern off vs on, measured kern deltas on the first advance. | <img src="examples/out/ex02_kerning.svg" width="640"> |
+| **Ligature.** Synthetic font: "fi" with liga off (two glyphs) vs on (one gid, merged cluster). | <img src="examples/out/ex03_ligature.svg" width="640"> |
+| **Marks.** Beh plus fatha positioned by GPOS with a zero advance; a plus acute composed by ccmp. | <img src="examples/out/ex04_marks.svg" width="640"> |
+| **Bidirectional runs.** `visualRuns` over mixed Hebrew: logical order, one band per level run, map connectors. | <img src="examples/out/ex05_bidi.svg" width="640"> |
+| **Arabic joining.** "مرحبا": logical codepoints vs visual glyphs, clusters 8 6 4 2 0. | <img src="examples/out/ex06_arabic.svg" width="640"> |
+| **Hebrew marks.** Shalom: vowels ride consonants, RTL reversal, GPOS offsets onto each base. | <img src="examples/out/ex07_hebrew.svg" width="640"> |
+| **Russian.** Precomposed vs decomposed YO shape to one gid; "Привет" kerned. | <img src="examples/out/ex08_russian.svg" width="640"> |
+| **Greek.** Precomposed vs decomposed alpha with tonos; "logos" kerned with final sigma. | <img src="examples/out/ex11_greek.svg" width="640"> |
+| **Thai.** Precomposed SARA AM vs NIKHAHIT plus SARA A give identical gid streams. | <img src="examples/out/ex09_thai.svg" width="640"> |
+| **Hangul.** Three conjoining jamo compose to the gid of precomposed han. | <img src="examples/out/ex10_hangul.svg" width="640"> |
+
 ## Roadmap
 * [x] Buffer, Unicode, normalize pipeline
 * [x] SFNT, scale, ShaperFont

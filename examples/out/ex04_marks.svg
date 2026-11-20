@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="820" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Marks: anchors, offsets, and zero advances</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">Arial at 380px. Left: GPOS mark to base. Right: ccmp composition.</text>
+<text x="120" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">beh + fatha (U+064E): two glyphs</text>
+<line x1="90" y1="500" x2="540" y2="500" stroke="#d00000" stroke-width="2"/>
+<path d="M253.4 225.9 Q253.4 234.4 243.8 242.8 Q227.1 249.3 190.0 264.3 Q190.0 256.2 198.2 248.7 Q213.6 242.2 253.4 225.9 Z " fill="#fff3e6" stroke="#ff8500" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="177" cy="520" r="6" fill="#ff8500" stroke="#ffffff" stroke-width="2"/>
+<line x1="120" y1="500" x2="177" y2="520" stroke="#ff8500" stroke-width="2" marker-end="url(#arrCluster)"/>
+<text x="193" y="525" font-size="14" fill="#ff8500" text-anchor="start">offset 57,-20</text>
+<text x="120" y="560" font-size="14" fill="#ff8500" text-anchor="middle">mark: adv 0</text>
+<path d="M391.1 445.6 L214.1 445.6 Q178.4 445.6 157.3 433.2 Q130.8 417.6 130.8 384.4 Q130.8 367.1 138.6 349.2 Q141.3 342.7 151.9 324.5 L157.5 328 Q153.4 336.5 149.5 345.1 Q144.1 358.2 144.1 368.6 Q144.1 390.5 167.1 402.6 Q187.7 413.3 219.3 413.3 L376.4 413.3 L376.4 408.3 Q376.4 387.6 371.4 374.6 Q366.4 361.4 354.3 352.1 L368.6 321.9 Q376.8 332.1 378.5 334.7 Q391.1 355.5 391.1 395.2 Z M284.8 490.7 L270.3 517.6 L240.2 502.0 L254.0 475.0 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="120" cy="500" r="6" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="120" y1="560" x2="391" y2="560" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="240" y="586" font-size="14" fill="#2a9d8f" text-anchor="start">base adv 271</text>
+<text x="120" y="620" font-size="14" fill="#22223b" text-anchor="start">The mark rides the base origin plus its offset and</text>
+<text x="120" y="642" font-size="14" fill="#22223b" text-anchor="start">consumes no advance of its own.</text>
+<text x="740" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">a + acute (U+0301): one glyph</text>
+<line x1="710" y1="500" x2="1160" y2="500" stroke="#d00000" stroke-width="2"/>
+<path d="M933.6 475.7 Q915.1 491.5 897.8 498.0 Q880.8 504.5 861.1 504.5 Q828.6 504.5 811.2 488.7 Q793.7 472.7 793.7 448.0 Q793.7 433.6 800.2 421.7 Q806.9 409.6 817.5 402.4 Q828.2 395.2 841.6 391.5 Q851.4 388.9 871.3 386.4 Q911.7 381.6 930.8 374.9 Q931.0 368.1 931.0 366.2 Q931.0 345.8 921.6 337.5 Q908.8 326.1 883.5 326.1 Q860.0 326.1 848.7 334.5 Q837.5 342.7 832.1 363.6 L799.5 359.2 Q803.9 338.2 814.1 325.4 Q824.3 312.4 843.6 305.5 Q862.9 298.5 888.4 298.5 Q913.6 298.5 929.4 304.4 Q945.1 310.4 952.6 319.5 Q960.0 328.4 962.9 342.1 Q964.6 350.6 964.6 372.9 L964.6 417.4 Q964.6 464 966.7 476.4 Q968.9 488.7 975.2 500 L940.3 500 Q935.1 489.6 933.6 475.7 Z M930.8 401.1 Q912.7 408.5 876.3 413.7 Q855.7 416.7 847.2 420.4 Q838.6 424.1 834.0 431.3 Q829.4 438.4 829.4 447.1 Q829.4 460.5 839.4 469.4 Q849.6 478.3 869.1 478.3 Q888.4 478.3 903.4 469.9 Q918.4 461.4 925.5 446.7 Q930.8 435.4 930.8 413.3 Z M865.9 278.5 L890.6 226.5 L934.4 226.5 L893.6 278.5 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="780" cy="500" r="6" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="780" y="170" font-size="14" fill="#22223b" text-anchor="middle">gid 105 cluster 0</text>
+<text x="780" y="194" font-size="14" fill="#ff8500" text-anchor="middle">2 chars, 1 glyph</text>
+<line x1="780" y1="560" x2="991" y2="560" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="885.5" y="586" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 211</text>
+<text x="780" y="620" font-size="14" fill="#22223b" text-anchor="start">ccmp composes the pair and merges clusters 0+1.</text>
+<text x="48" y="798" font-size="13" fill="#8d99ae" text-anchor="start">Mark positioning shifts the glyph without advancing the pen; composition replaces two codepoints with one glyph id.</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="780" viewBox="0 0 1280 780" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="780" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Anatomy of shaped text</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start"></text>
+<line x1="50" y1="698.7" x2="836" y2="698.7" stroke="#0a9396" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="832" y="690.7" font-size="13" fill="#0a9396" text-anchor="end">descender</text>
+<line x1="50" y1="73.0" x2="836" y2="73.0" stroke="#0a9396" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="832" y="65.0" font-size="13" fill="#0a9396" text-anchor="end">ascender</text>
+<line x1="48" y1="580" x2="1232" y2="580" stroke="#d00000" stroke-width="2"/>
+<text x="48" y="604" font-size="13" fill="#d00000" text-anchor="start">baseline</text>
+<rect x="89" y="180" width="376" height="400" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M89.2 580 L243.1 179.1 L300.3 179.1 L464.3 580 L403.9 580 L357.1 458.6 L189.5 458.6 L145.5 580 Z M204.8 415.4 L340.7 415.4 L298.9 304.4 Q279.8 253.8 270.5 221.2 Q262.8 259.8 248.9 297.8 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="90" y1="128" x2="90" y2="660" stroke="#4361ee" stroke-width="1" stroke-dasharray="3 4"/>
+<circle cx="90" cy="580" r="6" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="90" y1="642" x2="422" y2="642" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="256" y="668" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 332</text>
+<text x="256" y="112" font-size="14" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<text x="256" y="134" font-size="13" fill="#22223b" text-anchor="middle">gid 36</text>
+<rect x="424" y="180" width="368" height="400" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M579.8 580 L424.5 179.1 L481.9 179.1 L586.1 470.4 Q598.6 505.4 607.1 536.0 Q616.4 503.2 628.7 470.4 L737 179.1 L791.1 179.1 L634.2 580 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="422" y1="128" x2="422" y2="660" stroke="#4361ee" stroke-width="1" stroke-dasharray="3 4"/>
+<circle cx="422" cy="580" r="6" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="422" y1="642" x2="796" y2="642" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="609" y="668" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 374</text>
+<text x="609" y="112" font-size="14" fill="#ff8500" text-anchor="middle">cluster 1</text>
+<text x="609" y="134" font-size="13" fill="#22223b" text-anchor="middle">gid 57</text>
+<circle cx="796" cy="580" r="6" fill="#ffffff" stroke="#4361ee" stroke-width="2"/>
+<text x="796" y="604" font-size="13" fill="#4361ee" text-anchor="middle">pen</text>
+<text x="920" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">Reading the guides</text>
+<text x="920" y="180" font-size="15" fill="#8d99ae" text-anchor="start">total advance 706px over 2 glyphs</text>
+<text x="920" y="210" font-size="14" fill="#22223b" text-anchor="start">Arial at 560px</text>
+<text x="920" y="232" font-size="14" fill="#22223b" text-anchor="start">script=Latn direction=ltr</text>
+<rect x="920" y="254" width="26" height="12" fill="#d00000" stroke="#d00000" stroke-width="1"/>
+<text x="954" y="266" font-size="14" fill="#22223b" text-anchor="start">baseline, all origins sit on it</text>
+<rect x="920" y="280" width="26" height="12" fill="#0a9396" stroke="#0a9396" stroke-width="1"/>
+<text x="954" y="292" font-size="14" fill="#22223b" text-anchor="start">hhea ascender and descender</text>
+<rect x="920" y="306" width="26" height="12" fill="#4361ee" stroke="#4361ee" stroke-width="1"/>
+<text x="954" y="318" font-size="14" fill="#22223b" text-anchor="start">glyph origin and pen stops</text>
+<rect x="920" y="332" width="26" height="12" fill="#2a9d8f" stroke="#2a9d8f" stroke-width="1"/>
+<text x="954" y="344" font-size="14" fill="#22223b" text-anchor="start">advance arrows set the next origin</text>
+<rect x="920" y="358" width="26" height="12" fill="#8338ec" stroke="#8338ec" stroke-width="1"/>
+<text x="954" y="370" font-size="14" fill="#22223b" text-anchor="start">scaled extents boxes</text>
+<rect x="920" y="384" width="26" height="12" fill="#ff8500" stroke="#ff8500" stroke-width="1"/>
+<text x="954" y="396" font-size="14" fill="#22223b" text-anchor="start">UTF-8 byte cluster per glyph</text>
+<text x="920" y="432" font-size="14" fill="#22223b" text-anchor="start">After shape, buf.info holds glyph ids</text>
+<text x="920" y="454" font-size="14" fill="#22223b" text-anchor="start">and clusters, buf.pos holds advances</text>
+<text x="920" y="476" font-size="14" fill="#22223b" text-anchor="start">and offsets. The pen walk above is</text>
+<text x="920" y="498" font-size="14" fill="#22223b" text-anchor="start">exactly origin plus advance, in order.</text>
+<text x="48" y="758" font-size="13" fill="#8d99ae" text-anchor="start">Origins sit on the baseline; each advance arrow spans one glyph advance; purple boxes are scaled extents; orange tags are byte clusters.</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="760" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Kerning: the kern feature at work</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">Arial at 380px, kern off vs kern on. Gray is unkerned, ink is kerned.</text>
+<text x="90" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">AV with kern off (gray) vs on (ink)</text>
+<path d="M89.4 480 L193.9 208.0 L232.7 208.0 L344.0 480 L303.0 480 L271.3 397.6 L157.5 397.6 L127.7 480 Z M167.9 368.3 L260.1 368.3 L231.8 293.0 Q218.8 258.6 212.5 236.6 Q207.3 262.7 197.8 288.5 Z " fill="#f4f5fa" stroke="#9aa3b2" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M450.1 480 L344.7 208.0 L383.6 208.0 L454.3 405.6 Q462.9 429.3 468.6 450.1 Q474.9 427.9 483.3 405.6 L556.8 208.0 L593.5 208.0 L487.0 480 Z " fill="#f4f5fa" stroke="#9aa3b2" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="89" y="208" width="256" height="272" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M89.4 480 L193.9 208.0 L232.7 208.0 L344.0 480 L303.0 480 L271.3 397.6 L157.5 397.6 L127.7 480 Z M167.9 368.3 L260.1 368.3 L231.8 293.0 Q218.8 258.6 212.5 236.6 Q207.3 262.7 197.8 288.5 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="90" cy="480" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<rect x="316" y="208" width="250" height="272" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M422.1 480 L316.7 208.0 L355.6 208.0 L426.3 405.6 Q434.9 429.3 440.6 450.1 Q446.9 427.9 455.3 405.6 L528.8 208.0 L565.5 208.0 L459.0 480 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="315" cy="480" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="70" y1="480" x2="686" y2="480" stroke="#d00000" stroke-width="2"/>
+<line x1="596" y1="575" x2="568" y2="575" stroke="#d00000" stroke-width="2" marker-end="url(#arrRed)"/>
+<text x="582" y="566" font-size="14" fill="#d00000" text-anchor="middle" font-weight="bold">kern delta -28</text>
+<text x="70" y="610" font-size="14" fill="#8d99ae" text-anchor="start">off total 506</text>
+<text x="70" y="632" font-size="14" fill="#2a9d8f" text-anchor="start">on total 478</text>
+<text x="70" y="654" font-size="13" fill="#8d99ae" text-anchor="start">advances 253&gt;225 253&gt;253</text>
+<text x="90" y="684" font-size="13" fill="#8d99ae" text-anchor="start">Clusters and glyph ids are unchanged; only advances move.</text>
+<text x="700" y="150" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">To with kern off (gray) vs on (ink)</text>
+<path d="M798.5 480 L798.5 240.1 L708.9 240.1 L708.9 208.0 L924.5 208.0 L924.5 240.1 L834.5 240.1 L834.5 480 Z " fill="#f4f5fa" stroke="#9aa3b2" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M944.6 381.5 Q944.6 326.7 975.0 300.4 Q1000.5 278.5 1037.0 278.5 Q1077.7 278.5 1103.4 305.2 Q1129.2 331.7 1129.2 378.7 Q1129.2 416.7 1117.7 438.6 Q1106.4 460.3 1084.5 472.4 Q1062.8 484.5 1037.0 484.5 Q995.6 484.5 970.0 457.9 Q944.6 431.4 944.6 381.5 Z M978.9 381.5 Q978.9 419.3 995.5 438.3 Q1012.0 457.0 1037.0 457.0 Q1061.9 457.0 1078.4 438.1 Q1094.9 419.1 1094.9 380.4 Q1094.9 343.8 1078.2 325.1 Q1061.7 306.1 1037.0 306.1 Q1012.0 306.1 995.5 324.9 Q978.9 343.6 978.9 381.5 Z " fill="#f4f5fa" stroke="#9aa3b2" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="708" y="208" width="217" height="272" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M798.5 480 L798.5 240.1 L708.9 240.1 L708.9 208.0 L924.5 208.0 L924.5 240.1 L834.5 240.1 L834.5 480 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="700" cy="480" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<rect x="902" y="279" width="186" height="205" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M902.6 381.5 Q902.6 326.7 933.0 300.4 Q958.5 278.5 995.0 278.5 Q1035.7 278.5 1061.4 305.2 Q1087.2 331.7 1087.2 378.7 Q1087.2 416.7 1075.7 438.6 Q1064.4 460.3 1042.5 472.4 Q1020.8 484.5 995.0 484.5 Q953.6 484.5 928.0 457.9 Q902.6 431.4 902.6 381.5 Z M936.9 381.5 Q936.9 419.3 953.5 438.3 Q970.0 457.0 995.0 457.0 Q1019.9 457.0 1036.4 438.1 Q1052.9 419.1 1052.9 380.4 Q1052.9 343.8 1036.2 325.1 Q1019.7 306.1 995.0 306.1 Q970.0 306.1 953.5 324.9 Q936.9 343.6 936.9 381.5 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="890" cy="480" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="680" y1="480" x2="1233" y2="480" stroke="#d00000" stroke-width="2"/>
+<line x1="1143" y1="575" x2="1101" y2="575" stroke="#d00000" stroke-width="2" marker-end="url(#arrRed)"/>
+<text x="1122" y="566" font-size="14" fill="#d00000" text-anchor="middle" font-weight="bold">kern delta -42</text>
+<text x="680" y="610" font-size="14" fill="#8d99ae" text-anchor="start">off total 443</text>
+<text x="680" y="632" font-size="14" fill="#2a9d8f" text-anchor="start">on total 401</text>
+<text x="680" y="654" font-size="13" fill="#8d99ae" text-anchor="start">advances 232&gt;190 211&gt;211</text>
+<text x="700" y="684" font-size="13" fill="#8d99ae" text-anchor="start">Clusters and glyph ids are unchanged; only advances move.</text>
+<text x="48" y="738" font-size="13" fill="#8d99ae" text-anchor="start">Pair kerning (GPOS kern) shrinks the first advance; the second glyph shifts left by the kern delta.</text>
+</svg>

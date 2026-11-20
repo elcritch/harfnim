@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="820" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Arabic joining: shaped visual order</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">Arial at 330px shapes 'مرحبا' into 5 RTL glyphs: script=Arab direction=rtl</text>
+<text x="90" y="122" font-size="16" fill="#22223b" text-anchor="start" font-weight="bold">logical order (codepoints, byte offsets)</text>
+<rect x="340" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="395" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+0645</text>
+<text x="395" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 0</text>
+<rect x="460" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="515" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+0631</text>
+<text x="515" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 2</text>
+<rect x="580" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="635" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+062D</text>
+<text x="635" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 4</text>
+<rect x="700" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="755" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+0628</text>
+<text x="755" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 6</text>
+<rect x="820" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="875" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+0627</text>
+<text x="875" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 8</text>
+<text x="90" y="300" font-size="16" fill="#22223b" text-anchor="start" font-weight="bold">shaped visual order (RTL, joining applied)</text>
+<line x1="90" y1="560" x2="1190" y2="560" stroke="#d00000" stroke-width="2"/>
+<rect x="331.5" y="316" width="73" height="196" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M404.2 512.8 L381.7 512.8 Q370.7 512.8 364.1 503.9 Q358.3 496.2 355.2 480.9 Q352.3 465.6 350.7 443.2 Q349.8 425.0 348.6 405.8 Q347.7 386.6 345.9 376.8 Q344.3 366.8 341.4 360.5 Q337.8 352.8 331.6 347.0 L351.4 315.7 Q357.7 335.1 360.2 362.0 Q361.9 378.7 363.5 441.2 Q366.4 469.9 371.8 478.0 Q376.4 484.8 381.7 484.8 L404.2 484.8 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="328.5" cy="560" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="328.5" y1="626" x2="404.5" y2="626" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="366.5" y="652" font-size="13" fill="#22223b" text-anchor="middle">gid 910</text>
+<text x="366.5" y="672" font-size="13" fill="#ff8500" text-anchor="middle">cluster 8</text>
+<text x="366.5" y="692" font-size="13" fill="#2a9d8f" text-anchor="middle">adv 76</text>
+<line x1="875" y1="210" x2="366.5" y2="370" stroke="#ff8500" stroke-width="1.5"/>
+<rect x="392.5" y="410" width="93" height="165" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M485.1 512.8 L393.2 512.8 L393.2 484.8 L473.3 484.8 Q473.3 465.7 468.8 455.7 Q465.7 448.8 453.6 435.8 L466.2 409.5 Q477.8 424.2 480.7 432.4 Q485.1 444.8 485.1 473.5 Z M468.6 551.9 L456.1 575.3 L430.0 561.8 L441.9 538.2 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="404.5" cy="560" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="404.5" y1="626" x2="485.5" y2="626" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="445" y="652" font-size="13" fill="#22223b" text-anchor="middle">gid 913</text>
+<text x="445" y="672" font-size="13" fill="#ff8500" text-anchor="middle">cluster 6</text>
+<text x="445" y="692" font-size="13" fill="#2a9d8f" text-anchor="middle">adv 81</text>
+<line x1="755" y1="210" x2="445" y2="370" stroke="#ff8500" stroke-width="1.5"/>
+<rect x="473.5" y="420" width="187" height="92" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M660.3 512.8 L474.2 512.8 L474.2 484.8 L605.5 484.8 Q589.1 472.0 577.8 464.9 Q563.8 456.1 552.2 452.0 Q539.2 447.5 525.8 447.5 Q517.6 447.5 509.2 448.7 Q513.9 436.7 521.4 429.5 Q532.4 419.0 549.1 419.0 Q565.6 419.0 588.0 435.1 Q599.1 443.2 624.2 465.7 Q643.7 483.3 650.7 484.8 L660.3 484.8 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="485.5" cy="560" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="485.5" y1="626" x2="660.5" y2="626" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="573" y="652" font-size="13" fill="#22223b" text-anchor="middle">gid 931</text>
+<text x="573" y="672" font-size="13" fill="#ff8500" text-anchor="middle">cluster 4</text>
+<text x="573" y="692" font-size="13" fill="#2a9d8f" text-anchor="middle">adv 175</text>
+<line x1="635" y1="210" x2="573" y2="370" stroke="#ff8500" stroke-width="1.5"/>
+<rect x="671.5" y="419" width="151" height="170" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M821.8 512.8 Q821.8 530.5 806.6 549.5 Q793.4 566.3 773.8 578.4 Q755.1 590.0 743 590.0 Q731.9 590.0 719.0 586.7 Q709.2 584.3 695.5 579.2 Q683.9 574.8 672.4 570.5 L675.2 564.0 Q685.8 566.1 697.2 568.2 Q708.8 570.5 718.2 570.5 Q738.8 570.5 761.2 557.3 Q781.5 545.2 795.9 526.8 Q810.2 508.3 810.2 493.5 Q810.2 480.7 802.8 466.7 Q796.8 455.4 786.0 443.5 L795.2 418.2 Q808.4 430.4 814.7 442.7 Q821.8 456.6 821.8 473.6 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="660.5" cy="560" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="660.5" y1="626" x2="821.5" y2="626" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="741" y="652" font-size="13" fill="#22223b" text-anchor="middle">gid 941</text>
+<text x="741" y="672" font-size="13" fill="#ff8500" text-anchor="middle">cluster 2</text>
+<text x="741" y="692" font-size="13" fill="#2a9d8f" text-anchor="middle">adv 161</text>
+<line x1="515" y1="210" x2="741" y2="370" stroke="#ff8500" stroke-width="1.5"/>
+<rect x="809.5" y="425" width="143" height="87" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M951.5 512.8 L934.8 512.8 Q924.0 512.8 910.4 508.0 Q894.8 502.3 882.9 492.5 Q873.5 503.9 863.7 508.4 Q854.0 512.8 835.4 512.8 L810.2 512.8 L810.2 484.8 L834.9 484.8 Q849.5 484.8 861.0 477.3 Q869.8 471.5 877.1 461.1 Q886.9 446.9 901.3 436.4 Q914.2 427.1 924.9 424.5 Q936.1 441.4 942.7 454.9 Q951.5 473.3 951.5 484.8 Z M933 481.0 Q930.9 471.7 926.6 462.7 Q922.9 455.1 916.7 447.0 Q909 449.0 903.7 454.3 Q900.1 457.7 895.3 465.7 Q901.1 472.0 911.6 477.0 Q922.2 482.0 931.6 483.1 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="821.5" cy="560" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="821.5" y1="626" x2="951.5" y2="626" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="886.5" y="652" font-size="13" fill="#22223b" text-anchor="middle">gid 995</text>
+<text x="886.5" y="672" font-size="13" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<text x="886.5" y="692" font-size="13" fill="#2a9d8f" text-anchor="middle">adv 130</text>
+<line x1="395" y1="210" x2="886.5" y2="370" stroke="#ff8500" stroke-width="1.5"/>
+<text x="90" y="720" font-size="14" fill="#22223b" text-anchor="start">Clusters survive joining and presentation forms: 8 6 4 2 0 in visual order.</text>
+<text x="90" y="742" font-size="14" fill="#22223b" text-anchor="start">Each glyph keeps its source byte cluster, so hit testing maps back to logical text.</text>
+<text x="48" y="798" font-size="13" fill="#8d99ae" text-anchor="start">Arabic joining is automatic: the shaper picks positional forms and reverses runs for RTL display.</text>
+</svg>

@@ -15,6 +15,7 @@ Start here:
 8. [Unicode and normalization](normalize-unicode.md) - properties, normalizer
 9. [Tools and testing](tools-testing.md) - hr-shape, conformance, bench, tests
 10. [Performance](performance.md) - sharing, lazy parsing, hot path rules
+11. [Example posters](examples.md) - SVG shaping guides with big stroked glyphs
 
 Conventions used across these docs:
 

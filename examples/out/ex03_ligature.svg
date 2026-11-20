@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="780" viewBox="0 0 1280 780" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="780" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Ligature: GSUB merges f + i into fi</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">Synthetic demo font at 440px: blocky f, i, and fi glyphs with a type 4 ligature lookup.</text>
+<text x="90" y="220" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">liga off: two glyphs</text>
+<line x1="70" y1="600" x2="550" y2="600" stroke="#d00000" stroke-width="2"/>
+<rect x="133" y="293" width="147" height="307" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M134 600 L186.8 600 L186.8 292 L134 292 Z M134 388.8 L279.2 388.8 L279.2 353.6 L134 353.6 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="90" cy="600" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="90" y1="652" x2="310" y2="652" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="200" y="678" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 220</text>
+<text x="200" y="190" font-size="14" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<text x="200" y="166" font-size="13" fill="#22223b" text-anchor="middle">gid 1</text>
+<rect x="353" y="301" width="54" height="299" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M354 600 L406.8 600 L406.8 393.2 L354 393.2 Z M354 353.6 L406.8 353.6 L406.8 300.8 L354 300.8 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="600" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="310" y1="652" x2="451" y2="652" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="380.5" y="678" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 141</text>
+<text x="380.5" y="190" font-size="14" fill="#ff8500" text-anchor="middle">cluster 1</text>
+<text x="380.5" y="166" font-size="13" fill="#22223b" text-anchor="middle">gid 2</text>
+<line x1="560" y1="420" x2="660" y2="420" stroke="#ff8500" stroke-width="2.5" marker-end="url(#arrCluster)"/>
+<text x="610" y="400" font-size="14" fill="#ff8500" text-anchor="middle" font-weight="bold">liga</text>
+<text x="740" y="220" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">liga on: one glyph</text>
+<line x1="720" y1="600" x2="1200" y2="600" stroke="#d00000" stroke-width="2"/>
+<rect x="783" y="293" width="217" height="307" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M784 600 L836.8 600 L836.8 292 L784 292 Z M784 388.8 L929.2 388.8 L929.2 353.6 L784 353.6 Z M836.8 336 L946.8 336 L946.8 309.6 L836.8 309.6 Z M946.8 600 L999.6 600 L999.6 393.2 L946.8 393.2 Z M946.8 353.6 L999.6 353.6 L999.6 300.8 L946.8 300.8 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="740" cy="600" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="740" y1="652" x2="1092" y2="652" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="916" y="678" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 352</text>
+<text x="916" y="190" font-size="14" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<text x="916" y="166" font-size="13" fill="#22223b" text-anchor="middle">gid 20</text>
+<text x="90" y="700" font-size="14" fill="#22223b" text-anchor="start">Lookup type 4 (ligature set): coverage {f} + components {i} -&gt; gid 20.</text>
+<text x="90" y="724" font-size="14" fill="#22223b" text-anchor="start">The result carries cluster 0 (minimum of 0 and 1) and the ligature bit.</text>
+<text x="48" y="758" font-size="13" fill="#8d99ae" text-anchor="start">Substitution happens before positioning: the fi glyph gets its own advance (800 units) and extents.</text>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1020" viewBox="0 0 1280 1020" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="1020" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Bidirectional runs: logical versus visual order</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">visualRuns over 'ab Hebrew cd' (alef, bet, gimel), auto base direction, one run per level.</text>
+<text x="90" y="130" font-size="16" fill="#22223b" text-anchor="start" font-weight="bold">logical order (reading order, byte offsets)</text>
+<rect x="262" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="300" y="178" font-size="17" fill="#22223b" text-anchor="middle">a</text>
+<text x="300" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 0</text>
+<rect x="346" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="384" y="178" font-size="17" fill="#22223b" text-anchor="middle">b</text>
+<text x="384" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 1</text>
+<rect x="430" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="468" y="178" font-size="17" fill="#22223b" text-anchor="middle"> </text>
+<text x="468" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 2</text>
+<rect x="514" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="552" y="178" font-size="17" fill="#22223b" text-anchor="middle">U+05D0</text>
+<text x="552" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 3</text>
+<rect x="598" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="636" y="178" font-size="17" fill="#22223b" text-anchor="middle">U+05D1</text>
+<text x="636" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 5</text>
+<rect x="682" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="720" y="178" font-size="17" fill="#22223b" text-anchor="middle">U+05D2</text>
+<text x="720" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 7</text>
+<rect x="766" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="804" y="178" font-size="17" fill="#22223b" text-anchor="middle"> </text>
+<text x="804" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 9</text>
+<rect x="850" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="888" y="178" font-size="17" fill="#22223b" text-anchor="middle">c</text>
+<text x="888" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 10</text>
+<rect x="934" y="150" width="76" height="64" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="972" y="178" font-size="17" fill="#22223b" text-anchor="middle">d</text>
+<text x="972" y="200" font-size="12" fill="#8d99ae" text-anchor="middle">byte 11</text>
+<text x="90" y="300" font-size="16" fill="#4361ee" text-anchor="start" font-weight="bold">run 0: level 0 ltr</text>
+<rect x="90" y="312" width="1180" height="190" fill="#ffffff" stroke="#4361ee" stroke-width="1.5"/>
+<line x1="90" y1="430" x2="1270" y2="430" stroke="#d00000" stroke-width="1.5"/>
+<path d="M581.9 417.2 Q572.1 425.5 563.0 428.9 Q554.0 432.3 543.7 432.3 Q526.6 432.3 517.4 424.0 Q508.2 415.6 508.2 402.7 Q508.2 395.0 511.6 388.8 Q515.2 382.4 520.7 378.6 Q526.4 374.8 533.4 372.9 Q538.6 371.5 549.0 370.2 Q570.3 367.7 580.4 364.2 Q580.5 360.6 580.5 359.6 Q580.5 348.8 575.5 344.5 Q568.8 338.5 555.5 338.5 Q543.1 338.5 537.1 342.9 Q531.3 347.2 528.4 358.2 L511.3 355.9 Q513.6 344.8 519.0 338.1 Q524.3 331.3 534.5 327.7 Q544.7 323.9 558.0 323.9 Q571.3 323.9 579.6 327.1 Q587.9 330.2 591.8 335.0 Q595.7 339.7 597.3 346.9 Q598.2 351.4 598.2 363.1 L598.2 386.5 Q598.2 411.1 599.2 417.6 Q600.4 424.0 603.7 430 L585.4 430 Q582.6 424.5 581.9 417.2 Z M580.4 377.9 Q570.8 381.9 551.7 384.6 Q540.8 386.2 536.4 388.1 Q531.9 390.1 529.4 393.9 Q527.0 397.6 527.0 402.2 Q527.0 409.2 532.2 413.9 Q537.6 418.6 547.9 418.6 Q558.0 418.6 565.9 414.2 Q573.9 409.7 577.6 402.0 Q580.4 396.0 580.4 384.4 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="501" cy="430" r="4" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="556.5" y="482" font-size="12" fill="#ff8500" text-anchor="middle">cl 0</text>
+<line x1="300" y1="214" x2="556.5" y2="280" stroke="#ff8500" stroke-width="1.2"/>
+<path d="M641.4 430 L625.1 430 L625.1 286.8 L642.7 286.8 L642.7 337.9 Q653.8 323.9 671.1 323.9 Q680.7 323.9 689.1 327.9 Q697.7 331.7 703.2 338.7 Q708.8 345.6 711.9 355.5 Q715.0 365.4 715.0 376.6 Q715.0 403.2 701.8 417.8 Q688.7 432.3 670.2 432.3 Q651.8 432.3 641.4 417.0 Z M641.2 377.4 Q641.2 396.0 646.3 404.3 Q654.6 417.9 668.7 417.9 Q680.3 417.9 688.7 407.9 Q697.1 397.9 697.1 378.0 Q697.1 357.7 689.0 348.1 Q680.9 338.4 669.5 338.4 Q658 338.4 649.6 348.5 Q641.2 358.4 641.2 377.4 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="612" cy="430" r="4" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="667.5" y="482" font-size="12" fill="#ff8500" text-anchor="middle">cl 1</text>
+<line x1="384" y1="214" x2="667.5" y2="280" stroke="#ff8500" stroke-width="1.2"/>
+<circle cx="723" cy="430" r="4" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="751" y="482" font-size="12" fill="#ff8500" text-anchor="middle">cl 2</text>
+<line x1="468" y1="214" x2="751" y2="280" stroke="#ff8500" stroke-width="1.2"/>
+<text x="90" y="490" font-size="16" fill="#e36414" text-anchor="start" font-weight="bold">run 1: level 1 rtl</text>
+<rect x="90" y="502" width="1180" height="190" fill="#ffffff" stroke="#e36414" stroke-width="1.5"/>
+<line x1="90" y1="620" x2="1270" y2="620" stroke="#d00000" stroke-width="1.5"/>
+<path d="M552.6 553.0 L552.6 584.8 L562.2 620 L543.9 620 L536.8 594.6 Q524.8 594.6 516.7 609.2 L511.0 620 L491.9 620 L500.1 604.0 Q507.5 589.7 517.1 585.3 Q526.8 580.8 533.9 580.8 L533.9 553.6 Q533.9 545.2 532.7 540.9 Q531.5 536.5 527.3 533.9 Q523.1 531.2 516.2 531.2 Q510.2 531.2 505.5 532.2 L504.1 517.4 Q510.7 515.2 520.2 515.2 Q533.4 515.2 540.5 520.2 Q547.5 525.2 550.0 532.5 Q552.6 539.7 552.6 553.0 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="489.5" cy="620" r="4" fill="#e36414" stroke="#ffffff" stroke-width="2"/>
+<text x="529.5" y="672" font-size="12" fill="#ff8500" text-anchor="middle">cl 7</text>
+<line x1="720" y1="214" x2="529.5" y2="470" stroke="#ff8500" stroke-width="1.2"/>
+<path d="M657 604.4 L673.5 604.4 L673.5 620 L574.4 620 L574.4 604.4 L638.3 604.4 L638.3 569.0 Q638.3 554.6 635.1 547.3 Q631.9 540.0 623.4 535.7 Q615.0 531.4 597.1 531.4 Q590.8 531.4 577.5 532.8 L575.9 517.4 Q589.1 515.2 604.0 515.2 Q631.9 515.2 644.4 527.3 Q657 539.4 657 564.0 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="569.5" cy="620" r="4" fill="#e36414" stroke="#ffffff" stroke-width="2"/>
+<text x="623.5" y="672" font-size="12" fill="#ff8500" text-anchor="middle">cl 5</text>
+<line x1="636" y1="214" x2="623.5" y2="470" stroke="#ff8500" stroke-width="1.2"/>
+<path d="M784.7 620 L761.7 620 L722.1 564.0 Q712.9 569.0 711.3 584.2 L707.1 620 L687.8 620 L692.0 584.2 Q694.9 559.2 712.3 550.4 L688.1 516.4 L711.1 516.4 L744.3 562.8 Q750.4 558.8 752.7 553.8 Q755.1 548.7 756.5 537.2 L758.9 516.4 L778.3 516.4 L775.9 537.8 Q774.4 551.5 769.7 560.4 Q765.1 569.2 753.7 576.2 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="677.5" cy="620" r="4" fill="#e36414" stroke="#ffffff" stroke-width="2"/>
+<text x="734" y="672" font-size="12" fill="#ff8500" text-anchor="middle">cl 3</text>
+<line x1="552" y1="214" x2="734" y2="470" stroke="#ff8500" stroke-width="1.2"/>
+<text x="90" y="680" font-size="16" fill="#4361ee" text-anchor="start" font-weight="bold">run 2: level 0 ltr</text>
+<rect x="90" y="692" width="1180" height="190" fill="#ffffff" stroke="#4361ee" stroke-width="1.5"/>
+<line x1="90" y1="810" x2="1270" y2="810" stroke="#d00000" stroke-width="1.5"/>
+<circle cx="506.5" cy="810" r="4" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="534.5" y="862" font-size="12" fill="#ff8500" text-anchor="middle">cl 9</text>
+<line x1="804" y1="214" x2="534.5" y2="660" stroke="#ff8500" stroke-width="1.2"/>
+<path d="M643.4 772.0 L660.6 774.3 Q657.8 792.1 646.1 802.3 Q634.5 812.3 617.5 812.3 Q596.2 812.3 583.2 798.5 Q570.3 784.5 570.3 758.5 Q570.3 741.7 575.9 729.1 Q581.4 716.5 592.8 710.3 Q604.2 703.9 617.6 703.9 Q634.5 703.9 645.2 712.5 Q656.0 721.0 659.0 736.8 L641.9 739.4 Q639.5 728.9 633.2 723.7 Q627.1 718.4 618.3 718.4 Q605.0 718.4 596.7 728.0 Q588.4 737.4 588.4 758.0 Q588.4 778.9 596.4 788.4 Q604.4 797.9 617.3 797.9 Q627.6 797.9 634.6 791.5 Q641.5 785.2 643.4 772.0 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="562.5" cy="810" r="4" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="612.5" y="862" font-size="12" fill="#ff8500" text-anchor="middle">cl 10</text>
+<line x1="888" y1="214" x2="612.5" y2="660" stroke="#ff8500" stroke-width="1.2"/>
+<path d="M743.0 810 L743.0 796.9 Q733.1 812.3 714.0 812.3 Q701.6 812.3 691.1 805.5 Q680.8 798.7 675 786.5 Q669.3 774.2 669.3 758.2 Q669.3 742.7 674.5 730.1 Q679.7 717.4 690.0 710.7 Q700.4 703.9 713.2 703.9 Q722.6 703.9 729.9 707.9 Q737.2 711.9 741.8 718.2 L741.8 666.8 L759.3 666.8 L759.3 810 Z M687.4 758.2 Q687.4 778.2 695.8 788.0 Q704.2 797.9 715.6 797.9 Q727.1 797.9 735.2 788.5 Q743.3 779.0 743.3 759.7 Q743.3 738.4 735.1 728.5 Q726.9 718.5 714.8 718.5 Q703.1 718.5 695.2 728.1 Q687.4 737.6 687.4 758.2 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="662.5" cy="810" r="4" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<text x="718" y="862" font-size="12" fill="#ff8500" text-anchor="middle">cl 11</text>
+<line x1="972" y1="214" x2="718" y2="660" stroke="#ff8500" stroke-width="1.2"/>
+<text x="90" y="960" font-size="14" fill="#22223b" text-anchor="start">Each run shapes with an explicit direction, bypassing segment guessing.</text>
+<text x="90" y="982" font-size="14" fill="#22223b" text-anchor="start">Orange connectors follow VisualText.map from each source byte to its visual glyph.</text>
+<text x="48" y="998" font-size="13" fill="#8d99ae" text-anchor="start">visualRuns returns visual order text, a per byte source map with sentinel, and maximal level runs.</text>
+</svg>
