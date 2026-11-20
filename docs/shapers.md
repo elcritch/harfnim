@@ -84,8 +84,27 @@
   recording, seven basic features, repha and pre-base reordering,
   topographical and other features after clearing syllables.
 
+## AAT morx
+
+* `src/harfnim/aat/morx.nim`: morx table and chain parsing, extended
+  state tables, AAT lookup formats 0/2/4/6/8/10, feat table parsing
+  with OpenType feature to AAT flag compilation, and drivers for the
+  noncontextual, contextual, ligature, rearrangement, and insertion
+  subtables. Glyph 0xFFFF always maps to the deleted class, per
+  read-fonts. Substitution writes through `replaceInPlace` so deleted
+  slots are flagged for the post pass `removeDeletedGlyphs`
+  compaction.
+* `shape.nim` wiring: when morx is present and text is horizontal (or
+  the font has no GSUB), complex shapers stand down to the default
+  shaper and morx replaces GSUB. This mirrors the harfrust DUMBER
+  downgrade: no mark advance zeroing and no fallback mark
+  positioning on the morx path, and the feat table supplies flags
+  while `hr-shape` keeps explicit feature disables (value 0) so flag
+  compilation sees them. Verified exact against hb-shape on Geneva,
+  Helvetica, Khmer, Myanmar, and Sinhala system fonts.
+
 ## Status
 
 Done: Arabic, Hebrew, Hangul, Thai and Lao, Indic, Khmer, Myanmar,
-USE.
-Open: MVAR metrics, AAT morx, stch stretching.
+USE, AAT morx.
+Open: stch stretching.

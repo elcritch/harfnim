@@ -226,7 +226,7 @@ proc shapeGids(gids: openArray[uint32], map: AatMap,
   for i, g in gids:
     result.info[i].glyphId = g
   result.setDirection(dirLeftToRight)
-  applyMorx(morx, map, result, 256u32)
+  result.applyMorx(morx, map, 256u32)
   removeDeletedGlyphs(result)
 
 proc allFlagsMap(morx: MorxTable): AatMap =
@@ -296,4 +296,151 @@ test "morx removes deleted glyphs":
   check b.len == 2
   check b.info[0].glyphId == uint32('a')
   check b.info[1].glyphId == uint32('c')
+
+proc buildMorxCtx(): seq[uint8] =
+  # One contextual subtable: A DEL B fuses B into glyph 90 only when
+  # the deleted glyph keeps class 2 through the machine.
+  # Layout: header 12, STX 16 with the subs offset state table
+  # relative, class table 20, state array 24, entry pool 32, subs
+  # table 12.
+  var st: seq[uint8] = @[]
+  st.putU32(4u32)
+  st.putU32(20u32)
+  st.putU32(40u32)
+  st.putU32(64u32)
+  st.putU32(96u32)
+  # Class table format 6: glyph 10 -> 1, glyph 11 -> 3.
+  st.putU16(6u16)
+  st.putU16(4u16)
+  st.putU16(2u16)
+  st.putU16(8u16)
+  st.putU16(1u16)
+  st.putU16(0u16)
+  st.putU16(10u16)
+  st.putU16(1u16)
+  st.putU16(11u16)
+  st.putU16(3u16)
+  # State array: three rows of four classes.
+  for v in [0u16, 1u16, 0u16, 0u16,
+      0u16, 0u16, 2u16, 0u16,
+      0u16, 0u16, 0u16, 3u16]:
+    st.putU16(v)
+  # Entry pool: null, next state, next state, substitute current.
+  for e in [(0u16, 0u16, 0xFFFFu16, 0xFFFFu16),
+      (1u16, 0u16, 0xFFFFu16, 0xFFFFu16),
+      (2u16, 0u16, 0xFFFFu16, 0xFFFFu16),
+      (0u16, 0u16, 0xFFFFu16, 0u16)]:
+    st.putU16(e[0])
+    st.putU16(e[1])
+    st.putU16(e[2])
+    st.putU16(e[3])
+  # Substitution table: one u32 offset to a format 8 lookup.
+  st.putU32(4u32)
+  st.putU16(8u16)
+  st.putU16(11u16)
+  st.putU16(1u16)
+  st.putU16(90u16)
+  result = @[]
+  result.putU32(uint32(12 + st.len))
+  result.putU32(0x20000001u32)
+  result.putU32(0xFFFFFFFFu32)
+  result.add(st)
+
+proc morxCtxFont(): seq[uint8] =
+  var head = newSeq[uint8]()
+  head.putU32(0x00010000u32)
+  head.putU32(0u32)
+  head.putU32(0u32)
+  head.putU32(0x5F0F3CF5u32)
+  head.putU16(0u16)
+  head.putU16(1000u16)
+  for _ in 0 ..< 4:
+    head.putU32(0u32)
+  for _ in 0 ..< 4:
+    head.putI16(0i16)
+  head.putU16(0u16)
+  head.putU16(0u16)
+  head.putI16(0i16)
+  head.putI16(0i16)
+  head.putU16(0u16)
+  var maxp = newSeq[uint8]()
+  maxp.putU32(0x00005000u32)
+  maxp.putU16(256u16)
+  var hmtx = newSeq[uint8]()
+  hmtx.putU16(500u16)
+  hmtx.putI16(0i16)
+  var loca = @[0u8, 0u8, 0u8, 0u8]
+  let sub = buildMorxCtx()
+  var chain: seq[uint8] = @[]
+  chain.putU32(0xFFFFFFFFu32)
+  chain.putU32(uint32(16 + sub.len))
+  chain.putU32(0u32)
+  chain.putU32(1u32)
+  chain.add(sub)
+  var morx: seq[uint8] = @[]
+  morx.putU16(1u16)
+  morx.putU16(0u16)
+  morx.putU32(1u32)
+  morx.add(chain)
+  let tables = @[
+    ("head", head), ("hhea", buildHhea()), ("maxp", maxp),
+    ("hmtx", hmtx), ("cmap", buildCmap()), ("loca", loca),
+    ("morx", morx),
+  ]
+  result = @[]
+  result.putU32(0x00010000u32)
+  result.putU16(uint16(tables.len))
+  result.putU16(32u16)
+  result.putU16(1u16)
+  result.putU16(16u16)
+  var off = 12 + tables.len * 16
+  for (tname, data) in tables:
+    for c in tname:
+      result.add(uint8(c))
+    result.putU32(0u32)
+    result.putU32(uint32(off))
+    var padded = (data.len + 3) and not 3
+    result.putU32(uint32(padded))
+    off += padded
+  for (_, data) in tables:
+    result.add(data)
+    result.pad4()
+
+proc shapeCtx(gids: openArray[uint32]): Buffer =
+  let f = parseFont(morxCtxFont())
+  let t = f.tableData(0x6D6F7278u32)
+  doAssert t.ok
+  let m = parseMorxTable(f.bytes, t.offset, t.len)
+  doAssert m.ok and m.chains.len == 1
+  echo "DBG nsub=", m.chains[0].subtables.len, " kind=", m.chains[0].subtables[0].kind, " ncl=", m.chains[0].subtables[0].machine.nClasses, " nst=", m.chains[0].subtables[0].machine.nStates, " nsubs=", m.chains[0].subtables[0].subs.len
+  result = newBuffer()
+  result.pushStr("abc")
+  doAssert result.len == gids.len
+  for i, g in gids:
+    result.info[i].glyphId = g
+    if g == DeletedGlyph:
+      # Planted deletions behave like driver-produced ones.
+      result.scratchFlags = result.scratchFlags or ScratchFlagShaper0
+  result.setDirection(dirLeftToRight)
+  let map = AatMap(chainFlags: @[@[(flags: 0xFFFFFFFFu32,
+    first: 0u32, last: high(uint32))]])
+  discard applyMorxSubtable(m.chains[0].subtables[0], result,
+    uint32(f.numGlyphs), 0xFFFFFFFFu32, map.chainFlags[0])
+  removeDeletedGlyphs(result)
+
+test "morx routes deleted glyphs through class 2":
+  # A DEL B fuses B into glyph 90; without the deleted glyph the
+  # pair shapes unchanged. This locks the read-fonts rule that
+  # glyph 0xFFFF always maps to the deleted class.
+  let b = shapeCtx([10u32, DeletedGlyph, 11u32])
+  check b.len == 2
+  check b.info[0].glyphId == 10u32
+  check b.info[1].glyphId == 90u32
+  check b.info[0].cluster == 0u32
+  check b.info[1].cluster == 2u32
+  let c = shapeCtx([10u32, 11u32, 12u32])
+  check c.len == 3
+  check c.info[0].glyphId == 10u32
+  check c.info[1].glyphId == 11u32
+  check c.info[2].glyphId == 12u32
 

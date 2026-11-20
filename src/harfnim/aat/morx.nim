@@ -308,11 +308,9 @@ proc stateEntry*(t: MorxStateTable, state: uint16,
 
 proc glyphClass*(t: MorxStateTable, gid: uint32,
     numGlyphs: uint32): uint16 =
-  ## Maps a glyph to its class, out of bounds when unmapped.
+  ## Maps a glyph to its class. Glyph 0xFFFF is always the deleted
+  ## class; unmapped glyphs are out of bounds.
   if gid == DeletedGlyph:
-    let v = t.classes.classValueAt(gid, numGlyphs)
-    if v.isSome:
-      return v.get
     return ClassDeletedGlyph
   let v = t.classes.classValueAt(gid, numGlyphs)
   if v.isSome:
@@ -727,6 +725,13 @@ proc curGid(b: Buffer, i: int): tuple[ok: bool, gid: uint32] =
     return (false, 0u32)
   (true, b.info[i].glyphId)
 
+proc replaceInPlace(b: var Buffer, i: int, gid: uint32) =
+  ## Writes a substitution result, flagging deleted slots for the
+  ## post-pass compaction.
+  b.info[i].glyphId = gid
+  if gid == DeletedGlyph:
+    b.scratchFlags = b.scratchFlags or ScratchFlagShaper0
+
 proc driveTransition(kind: MorxSubKind, sub: MorxSubtable,
     e: MorxEntry, d: var MorxDrive, b: var Buffer): bool =
   ## Runs one entry transition; false aborts the subtable.
@@ -786,7 +791,7 @@ proc driveTransition(kind: MorxSubKind, sub: MorxSubtable,
         some(min(b.idx + 1, b.len)))
       if d.mark < 0 or d.mark >= b.info.len:
         return false
-      b.info[d.mark].glyphId = replacement.get
+      b.replaceInPlace(d.mark, replacement.get)
     replacement = none(uint32)
     let at = min(b.idx, b.len - 1)
     if e.p1 != 0xFFFFu16:
@@ -800,7 +805,7 @@ proc driveTransition(kind: MorxSubKind, sub: MorxSubtable,
     if replacement.isSome:
       if at < 0 or at >= b.info.len:
         return false
-      b.info[at].glyphId = replacement.get
+      b.replaceInPlace(at, replacement.get)
     if (e.flags and CtxSetMark) != 0u16:
       d.markSet = true
       d.mark = b.idx
@@ -1041,7 +1046,7 @@ proc applyNoncontextual(sub: MorxSubtable, b: var Buffer,
       break
     let v = sub.ncLookup.classValueAt(b.info[i].glyphId, numGlyphs)
     if v.isSome:
-      b.info[i].glyphId = uint32(v.get)
+      b.replaceInPlace(i, uint32(v.get))
   true
 
 proc applyMorxSubtable*(sub: MorxSubtable, b: var Buffer,
@@ -1057,7 +1062,7 @@ proc applyMorxSubtable*(sub: MorxSubtable, b: var Buffer,
   of skNoncontextual:
     applyNoncontextual(sub, b, numGlyphs, subFlags, ranges)
 
-proc applyMorx*(morx: MorxTable, map: AatMap, b: var Buffer,
+proc applyMorx*(b: var Buffer, morx: MorxTable, map: AatMap,
     numGlyphs: uint32) =
   ## Applies all chains in order, reversing around subtables whose
   ## coverage demands it.

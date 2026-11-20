@@ -232,8 +232,9 @@ for part in featureParts:
   try:
     let f = parseFeature(part)
     mentioned.add(f.tag.toU32())
-    if f.value != 0u32:
-      feats.add(f)
+    # Keep disabled features in the list: GSUB/GPOS skip zero values,
+    # but morx flag compilation needs explicit disables.
+    feats.add(f)
   except ValueError:
     quit("invalid feature: " & part)
 

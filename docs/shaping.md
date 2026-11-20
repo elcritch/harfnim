@@ -53,6 +53,11 @@ GSUB script to a `ShaperKind`:
   default, then user features with fresh bits.
 * Legacy `kern` runs after GPOS when requested and GPOS supplied no kern
   for the script.
+* AAT morx replaces GSUB when present and the text is horizontal (or
+  the font has no GSUB): complex shapers stand down to the default
+  shaper, morx applies with feat derived flags, deleted glyphs are
+  compacted, and the morx path skips mark advance zeroing and fallback
+  mark positioning.
 * Fallback mark positioning runs only when neither GPOS nor legacy kern
   positioned, and Thai, Indic, Khmer, Myanmar, and USE opt out.
 * Marks without GPOS attachment still get zero advances; RTL buffers

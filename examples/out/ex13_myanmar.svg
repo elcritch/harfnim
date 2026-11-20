@@ -30,7 +30,7 @@
 <circle cx="467" cy="590" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
 <line x1="467" y1="656" x2="813" y2="656" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
 <text x="640" y="682" font-size="13" fill="#22223b" text-anchor="middle">gid 114</text>
-<text x="640" y="702" font-size="13" fill="#ff8500" text-anchor="middle">cluster 9</text>
+<text x="640" y="702" font-size="13" fill="#ff8500" text-anchor="middle">cluster 0</text>
 <path d="M738.8 379.7 Q738.8 385.9 736.8 391.2 Q734.7 396.4 731.0 400.3 Q727.2 404.1 722.1 406.2 Q716.9 408.3 710.7 408.3 Q702.4 408.3 696.8 404.1 Q691.0 399.7 687.5 392.7 Q683.9 385.6 682.4 376.9 Q680.8 368.1 680.8 359.2 Q680.8 348.3 683 337.7 Q685.2 327.0 690.3 318.6 Q695.3 310.2 703.6 305 Q711.8 299.7 723.8 299.7 L734.2 299.7 L734.2 315.8 L723.8 315.8 Q715.5 315.8 710.3 319.5 Q705.2 323.3 702.2 328.8 Q699.1 334.1 698 340.2 Q696.9 346.2 696.9 350.9 L696.9 354.8 Q698.5 353.9 700.7 353.1 Q702.7 352.2 704.9 351.6 Q707.1 350.9 709.1 350.6 Q711.1 350.3 712.5 350.3 Q719.1 350.3 724.1 352.8 Q728.9 355.2 732.2 359.2 Q735.5 363.1 737.2 368.6 Q738.8 373.9 738.8 379.7 Z M723.8 377.8 Q723.8 374.4 722.7 372.2 Q721.6 369.8 719.7 368.6 Q717.8 367.3 715.5 366.9 Q713.2 366.2 710.7 366.2 Q709.2 366.2 707.5 366.6 Q705.7 366.9 703.8 367.3 Q701.8 367.8 700.0 368.4 Q698.2 368.9 696.9 369.5 L696.9 372.3 Q696.9 375.5 697.7 379.1 Q698.5 382.5 700.2 385.5 Q701.8 388.4 704.4 390.3 Q707.1 392.2 710.7 392.2 Q716.4 392.2 720.2 388.4 Q723.8 384.7 723.8 377.8 Z " fill="#fff3e6" stroke="#ff8500" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="813" cy="590" r="4" fill="#ff8500" stroke="#ffffff" stroke-width="2"/>
 <text x="868" y="652" font-size="14" fill="#ff8500" text-anchor="middle">adv 0</text>
@@ -38,7 +38,7 @@
 <line x1="575" y1="210" x2="813" y2="390" stroke="#ff8500" stroke-width="1.5"/>
 <line x1="695" y1="210" x2="813" y2="390" stroke="#ff8500" stroke-width="1.5"/>
 <line x1="815" y1="210" x2="640" y2="390" stroke="#ff8500" stroke-width="1.5"/>
-<text x="90" y="762" font-size="14" fill="#22223b" text-anchor="start">KA (gid 114) keeps cluster 9; the reph (gid 252, cluster 0) takes no advance.</text>
+<text x="90" y="762" font-size="14" fill="#22223b" text-anchor="start">KA (gid 114) and the reph (gid 252) share cluster 0; the reph takes no advance.</text>
 <text x="90" y="784" font-size="14" fill="#22223b" text-anchor="start">The crossing connectors are the reorder: base first, reph after, clusters intact.</text>
-<text x="48" y="858" font-size="13" fill="#8d99ae" text-anchor="start">The Myanmar shaper parks RA plus ASAT plus VIRAMA after the base consonant.</text>
+<text x="48" y="858" font-size="13" fill="#8d99ae" text-anchor="start">AAT morx fuses RA plus ASAT plus VIRAMA after the base consonant.</text>
 </svg>

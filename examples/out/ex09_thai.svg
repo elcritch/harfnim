@@ -20,12 +20,12 @@
 <circle cx="758.5" cy="400" r="4" fill="#ff8500" stroke="#ffffff" stroke-width="2"/>
 <text x="758.5" y="462" font-size="14" fill="#ff8500" text-anchor="middle">adv 0</text>
 <text x="758.5" y="488" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 0</text>
-<text x="758.5" y="510" font-size="14" fill="#22223b" text-anchor="middle">gid 103 cl 0</text>
+<text x="758.5" y="510" font-size="14" fill="#22223b" text-anchor="middle">gid 103 cl 3</text>
 <path d="M864.6 199.9 Q914.9 199.9 937.1 229 Q946.0 240.8 946.0 255.2 L946.0 400 L915.9 400 L915.9 258.5 Q915.9 242.6 896.0 229.2 Q884.5 221.6 862.0 221.6 Q844.6 221.6 830.4 227.2 Q817.9 232.1 805.4 241.8 Q789.6 254.7 787.5 261.8 L787.5 229.9 Q799.4 216.3 815.2 209.6 Q838.1 199.9 864.6 199.9 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="758.5" cy="400" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
 <line x1="758.5" y1="462" x2="984.5" y2="462" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
 <text x="871.5" y="488" font-size="14" fill="#2a9d8f" text-anchor="middle">adv 226</text>
-<text x="871.5" y="510" font-size="14" fill="#22223b" text-anchor="middle">gid 78 cl 0</text>
+<text x="871.5" y="510" font-size="14" fill="#22223b" text-anchor="middle">gid 78 cl 3</text>
 <line x1="90" y1="400" x2="1190" y2="400" stroke="#d00000" stroke-width="2"/>
 <text x="90" y="560" font-size="20" fill="#22223b" text-anchor="start" font-weight="bold">NIKHIT + SARA A (U+0E01 U+0E4D U+0E32)</text>
 <path d="M577.8 700 L577.8 596.1 Q577.8 590.2 578.8 585.3 Q582.1 575.1 589.3 568.8 Q591.9 567.2 596.2 563.6 Q590.6 560.5 580.5 555.6 Q571.1 552.5 561.8 549.1 L561.8 535.3 Q582.8 514.3 609.2 506.0 Q627.3 500.2 644.0 500.2 Q699.2 500.2 713.8 529.5 Q720.3 542.8 720.3 558.1 L720.3 700 L690.7 700 L690.7 559.6 Q690.7 536.6 673.1 527.7 Q663.2 522.7 644.7 522.7 Q629.7 522.7 616.1 528.1 Q605.3 532.4 596.6 540.0 Q602.9 542.4 615.9 548.9 Q623.5 553.6 628.8 557.8 Q628.8 557.8 634.9 563.2 Q631.7 564.5 625.0 567.9 Q618.6 572.1 614.1 577.0 Q607.8 583.6 607.8 601.2 L607.8 700 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>

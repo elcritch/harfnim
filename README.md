@@ -89,7 +89,7 @@ them with `clue task examples` (see `examples/README.md`).
 | **Thai.** Precomposed SARA AM vs NIKHAHIT plus SARA A give identical gid streams. | <img src="examples/out/ex09_thai.svg" width="640"> |
 | **Hangul.** Three conjoining jamo compose to the gid of precomposed han. | <img src="examples/out/ex10_hangul.svg" width="640"> |
 | **Khmer.** AE leaps before KHA; COENG plus MO fuse below; RO keeps cluster 12. | <img src="examples/out/ex12_khmer.svg" width="640"> |
-| **Myanmar.** The reph sinks below the base; clusters 9 and 0 in reverse. | <img src="examples/out/ex13_myanmar.svg" width="640"> |
+| **Myanmar.** The reph sinks below the base; both glyphs share cluster 0. | <img src="examples/out/ex13_myanmar.svg" width="640"> |
 | **USE.** One Sinhala syllable shapes to two ligatures, clusters 0 and 6. | <img src="examples/out/ex14_use.svg" width="640"> |
 | **Japanese.** Dakuten equivalence; kanji plus hiragana word in full ems. | <img src="examples/out/ex15_japanese.svg" width="640"> |
 | **Chinese.** Four full em han; Latin around han with byte clusters. | <img src="examples/out/ex16_chinese.svg" width="640"> |
@@ -120,7 +120,9 @@ them with `clue task examples` (see `examples/README.md`).
 * [x] Myanmar shaper (reph positioning, pre-base matras; mym2)
 * [x] USE shaper (reph/pref recording, post-base reordering)
 * [x] MVAR metrics (hhea/vhea ascender, descender, line gap)
-* [ ] AAT morx
+* [x] AAT morx (chains, state machines, noncontextual, contextual,
+  ligature, rearrangement, insertion; feat flag compilation; DUMBER
+  downgrade; deleted glyph compaction)
 * [ ] stch stretching
 
 ## Tools
@@ -144,7 +146,7 @@ clue build tools/conformance.nim --out:/tmp/conformance
 ```
 
 Known gaps are tracked as expected failures in the script
-(morx ligatures, fallback mark positioning on fonts without usable
+(fallback mark positioning on fonts without usable
 Arabic mark data).
 
 ### ❤ Contributions & Support

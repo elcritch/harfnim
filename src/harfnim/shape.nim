@@ -10,6 +10,7 @@
 
 import std/options
 
+import ./aat/morx
 import ./buffer
 import ./direction
 import ./feature
@@ -573,7 +574,14 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
   # cost milliseconds on large fonts.
   let gsubOpt = sf.cachedGsub()
   let gposOpt = sf.cachedGpos()
-  let shaper = shaperForBuffer(buf, gsubOpt, plan.scriptTag)
+  let morxOpt = sf.cachedMorx()
+  var shaper = shaperForBuffer(buf, gsubOpt, plan.scriptTag)
+  # AAT morx replaces OpenType shaping, like harfrust's DUMBER shaper
+  # downgrade: complex shapers stand down when morx applies.
+  let useMorx = morxOpt.isSome and
+    (buf.direction.isHorizontal() or gsubOpt.isNone)
+  if useMorx and shaper != skDefault:
+    shaper = skDefault
   let useArabic = shaper == skArabic
   var hasGposMark = false
   if gposOpt.isSome:
@@ -656,7 +664,13 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
   buf.allocateGsubGposVars()
   synthesizeGlyphClasses(buf)
   recategorizeMarks(buf)
-  if useArabic and haveArabicMasks:
+  if useMorx and morxOpt.isSome:
+    let featOpt = sf.cachedFeat()
+    let featList = if featOpt.isSome: featOpt.get else: @[]
+    let amap = compileAatMap(morxOpt.get.chains, featList, plan.features)
+    buf.applyMorx(morxOpt.get, amap, uint32(sf.font.numGlyphs))
+    buf.removeDeletedGlyphs()
+  elif useArabic and haveArabicMasks:
     if gsubOpt.isSome:
       buf.applyArabicGsub(gsubOpt.get, plan.scriptTag, plan.langTag,
         plan.features, sf, arabicMasks)
@@ -746,21 +760,27 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
     shaper != skIndic and shaper != skKhmer and shaper != skMyanmar and
     shaper != skUse and (not kernRan or not hasCrossKern)
   # Late mark zeroing (arabic/hebrew/default) when GPOS did not attach.
-  if (buf.scratchFlags and ScratchFlagHasGposAttachment) == 0u32:
+  # The morx path keeps mark advances (harfrust DUMBER shaper: no mark
+  # advance zeroing and no fallback positioning).
+  let noAttach =
+    (buf.scratchFlags and ScratchFlagHasGposAttachment) == 0u32
+  if noAttach and not useMorx:
     buf.zeroMarkWidths(buf.direction.isForward())
   buf.zeroWidthDefaultIgnorables()
   buf.propagateAttachmentOffsets()
-  if (buf.scratchFlags and ScratchFlagHasGposAttachment) == 0u32 and
-      fallbackAllowed:
-    # Fallback mark positioning when no GPOS attachment happened.
-    buf.fallbackPositionMarks(sf)
-  else:
-    # Marks without GPOS attachment still get zero advances.
-    for i in 0 ..< min(buf.len, buf.info.len):
-      if i < buf.pos.len and buf.info[i].isMarkGlyph():
-        if buf.pos[i].attachChain() == 0i16:
-          buf.pos[i].xAdvance = 0i32
-          buf.pos[i].yAdvance = 0i32
+  # The morx path skips all of this (harfrust DUMBER shaper): marks
+  # keep their advances, with no fallback positioning.
+  if not useMorx:
+    if noAttach and fallbackAllowed:
+      # Fallback mark positioning when no GPOS attachment happened.
+      buf.fallbackPositionMarks(sf)
+    else:
+      # Marks without GPOS attachment still get zero advances.
+      for i in 0 ..< min(buf.len, buf.info.len):
+        if i < buf.pos.len and buf.info[i].isMarkGlyph():
+          if buf.pos[i].attachChain() == 0i16:
+            buf.pos[i].xAdvance = 0i32
+            buf.pos[i].yAdvance = 0i32
   if buf.direction.isBackward():
     buf.reverse()
   # TODO: fallback spaces.

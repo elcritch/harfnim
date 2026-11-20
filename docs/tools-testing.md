@@ -26,8 +26,8 @@ clue build tools/conformance.nim --out:/tmp/conformance
 /tmp/conformance --hr-shape /tmp/hr-shape --only "مرحبا"
 ```
 
-Current status: 474 pass, 0 fail, 30 expected fail (morx ligatures and
-fallback mark positioning on fonts without usable Arabic mark data).
+Current status: 484 pass, 0 fail, 20 expected fail (fallback mark
+positioning on fonts without usable Arabic mark data).
 
 ## Bench
 

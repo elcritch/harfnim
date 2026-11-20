@@ -44,9 +44,6 @@ const
   ArabicFeatures = [""]
   MiscFeatures = [""]
 
-  LigaTexts = ["fi", "ffi", "ffl", "fl", "AVfiToWe"]
-  MorxFonts = ["Geneva.ttf", "Helvetica.ttc"]
-
   ArabicMarkTexts = ["بِسْمِ", "مُحَمَّد", "الْعَرَبِيَّةُ", "السَّلامُ"]
 
   # Arabic mark-fallback differences on fonts without usable Arabic mark
@@ -68,9 +65,6 @@ const
 
 proc expectedFailure(font, features, text, ours, hb: string): string =
   let base = lastPathPart(font)
-  if base in MorxFonts and "liga" in features.replace("-liga", "") and
-      text in LigaTexts:
-    return "morx-liga"
   if features == "" and text in ArabicMarkTexts and
       (base, text) in FallbackMarkDiffs:
     return "fallback-mark-positioning"
@@ -213,7 +207,7 @@ for c in cases:
 
 echo ""
 echo $npass & " pass, " & $nfail & " fail, " & $nxfail &
-  " expected-fail (morx-liga, fallback-mark-positioning)"
+  " expected-fail (fallback-mark-positioning)"
 for k, c in failures:
   echo "FAIL: " & lastPathPart(c.font) & " " & c.text.escape &
     " [" & c.feats & "]"

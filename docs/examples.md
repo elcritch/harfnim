@@ -118,9 +118,9 @@ glyphs, and clusters 0 and 12 survive for hit testing.
 
 Shapes RA plus ASAT plus VIRAMA plus KA with Myanmar Sangam MN. The
 three codepoint reph moves after its base consonant and fuses into a
-zero advance form, so two visual glyphs carry clusters 9 and 0 in
-reverse. The converging connectors show three codepoints collapsing
-into one glyph while KA holds its byte offset.
+zero advance form, so both visual glyphs share cluster 0 with the base
+first. The converging connectors show three codepoints collapsing
+into the reph glyph while KA leads.
 
 ## 14. USE (`ex14_use`, 1280x880)
 

@@ -3,8 +3,8 @@
 ## Shapes RA plus ASAT plus VIRAMA plus KA with Myanmar Sangam MN.
 ## The top strip is logical order with codepoint and byte labels; the
 ## bottom strip is shaped visual order. The three codepoint reph moves
-## after its base consonant and fuses into a zero advance form, so the
-## two visual glyphs take clusters 9 and 0 in reverse.
+## after its base consonant and fuses into a zero advance form, so both
+## visual glyphs share cluster 0 with the base first.
 
 import std/strformat
 import std/strutils
@@ -28,7 +28,7 @@ proc main() =
   let k = pixelScale(sf, SizePx)
   let b = shapeText(sf, Text, defaultFeatures())
   doAssert b.len == 2
-  doAssert b.info[0].cluster == 9u32
+  doAssert b.info[0].cluster == 0u32
   doAssert b.info[1].cluster == 0u32
   var c = newCanvas(CanvasW, CanvasH)
   c.header("Myanmar: the reph sinks below the base",
@@ -108,12 +108,12 @@ proc main() =
     c.line(centers[n], topY + 70, gcenters[Targets[n]], baseY - 200,
       Cluster, 1.5)
   c.label(90, 762,
-    fmt"KA (gid {b.info[0].glyphId}) keeps cluster 9; the reph (gid {b.info[1].glyphId}, cluster 0) takes no advance.",
+    fmt"KA (gid {b.info[0].glyphId}) and the reph (gid {b.info[1].glyphId}) share cluster 0; the reph takes no advance.",
     14, Ink)
   c.label(90, 784,
     "The crossing connectors are the reorder: base first, reph after, clusters intact.",
     14, Ink)
-  c.footer("The Myanmar shaper parks RA plus ASAT plus VIRAMA after the base consonant.")
+  c.footer("AAT morx fuses RA plus ASAT plus VIRAMA after the base consonant.")
   let f = outPath("ex13_myanmar")
   c.save(f)
   echo "wrote " & f

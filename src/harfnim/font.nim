@@ -1,5 +1,6 @@
 import std/options
 
+import ./aat/morx
 import ./buffer
 import ./draw
 import ./normalize
@@ -34,6 +35,14 @@ type
     ## True once kern parsing was attempted.
     kern*: Option[KernData]
     ## Parsed kern table, if present.
+    morxDone*: bool
+    ## True once morx parsing was attempted.
+    morx*: Option[MorxTable]
+    ## Parsed morx table, if present.
+    featDone*: bool
+    ## True once feat parsing was attempted.
+    feat*: Option[seq[FeatEntry]]
+    ## Parsed feat feature entries.
 
   ShaperFont* = ref object
     ## Shaper handle over a parsed font (HarfBuzz `hb_font_t` equivalent).
@@ -95,6 +104,44 @@ proc cachedKern*(f: ShaperFont): Option[KernData] =
     f.layout.kern = parseKern(f.font)
     f.layout.kernDone = true
   f.layout.kern
+
+const
+  TagMorx = 0x6D6F7278u32
+  TagFeat = 0x66656174u32
+
+proc cachedMorx*(f: ShaperFont): Option[MorxTable] =
+  ## Like `cachedGsub` for the AAT `morx` table.
+  if f.layout == nil:
+    let t = f.font.tableData(TagMorx)
+    if not t.ok:
+      return none(MorxTable)
+    let m = parseMorxTable(f.font.bytes, t.offset, t.len)
+    if m.ok:
+      return some(m)
+    return none(MorxTable)
+  if not f.layout.morxDone:
+    let t = f.font.tableData(TagMorx)
+    var m = MorxTable(ok: false)
+    if t.ok:
+      m = parseMorxTable(f.font.bytes, t.offset, t.len)
+    if m.ok:
+      f.layout.morx = some(m)
+    f.layout.morxDone = true
+  f.layout.morx
+
+proc cachedFeat*(f: ShaperFont): Option[seq[FeatEntry]] =
+  ## Like `cachedGsub` for the AAT `feat` table.
+  if f.layout == nil:
+    let t = f.font.tableData(TagFeat)
+    if not t.ok:
+      return none(seq[FeatEntry])
+    return some(parseFeat(f.font.bytes, t.offset, t.len))
+  if not f.layout.featDone:
+    let t = f.font.tableData(TagFeat)
+    if t.ok:
+      f.layout.feat = some(parseFeat(f.font.bytes, t.offset, t.len))
+    f.layout.featDone = true
+  f.layout.feat
 
 proc setScale*(f: var ShaperFont, scale: int32) =
   ## Sets uniform scale from font units.
