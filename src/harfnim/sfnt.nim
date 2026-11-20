@@ -955,30 +955,41 @@ proc glyphOffsets(f: SfntFont): tuple[ok: bool, starts, ends: seq[int]] =
       ends[i] = glyf.offset + e
   (true, starts, ends)
 
+proc glyphOffsetCache(f: SfntFont): LocaCache =
+  # Manually constructed faces can have no cache; keep their offsets local.
+  result = f.locaCache
+  if result == nil:
+    result = LocaCache()
+  if not result.done:
+    let (ok, starts, ends) = glyphOffsets(f)
+    result.ok = ok
+    result.starts = starts
+    result.ends = ends
+    result.done = true
+
 proc cachedGlyphOffsets*(f: SfntFont): tuple[ok: bool, starts,
     ends: seq[int]] =
-  ## `glyphOffsets`, parsed once per font. Outline/extent lookups call
-  ## this per glyph, and a full `loca` walk per call costs milliseconds
-  ## on large fonts (50k glyphs). Falls back to the uncached walk when
-  ## the font bypassed `parseFontData` (no cache allocated).
-  if f.locaCache == nil:
-    return glyphOffsets(f)
-  if not f.locaCache.done:
-    let (ok, s, e) = glyphOffsets(f)
-    f.locaCache.ok = ok
-    f.locaCache.starts = s
-    f.locaCache.ends = e
-    f.locaCache.done = true
-  (f.locaCache.ok, f.locaCache.starts, f.locaCache.ends)
+  ## Returns an owned copy of the glyph offset table.
+  let cache = f.glyphOffsetCache()
+  (cache.ok, cache.starts, cache.ends)
+
+proc glyphDataRange(cache: LocaCache, gid: uint32): tuple[ok: bool, off, len: int] =
+  if not cache.ok or int(gid) >= cache.starts.len:
+    return (false, 0, 0)
+  let s = cache.starts[int(gid)]
+  let e = cache.ends[int(gid)]
+  if e < s:
+    return (false, 0, 0)
+  (true, s, e - s)
+
+proc glyphDataRange*(f: SfntFont, gid: uint32): tuple[ok: bool, off, len: int] =
+  ## Returns the byte range of the glyph's `glyf` data. Empty glyphs have len 0.
+  f.glyphOffsetCache().glyphDataRange(gid)
 
 proc glyphBoundsUnscaled*(f: SfntFont,
     gid: uint32): Option[tuple[xMin, yMin, xMax, yMax: int32]] =
-  let (ok, starts, ends) = f.cachedGlyphOffsets()
-  if not ok or int(gid) >= starts.len:
-    return none(tuple[xMin, yMin, xMax, yMax: int32])
-  let s = starts[int(gid)]
-  let e = ends[int(gid)]
-  if e - s < 10:
+  let (ok, s, len) = f.glyphDataRange(gid)
+  if not ok or len < 10:
     return none(tuple[xMin, yMin, xMax, yMax: int32])
   let numContours = readI16(f.bytes, s)
   if numContours == 0i16:
@@ -1024,38 +1035,17 @@ proc gvarContextFor(f: SfntFont, coords: seq[float32]): GvarContext =
     return noGvarContext()
   GvarContext(table: gt, coords: coords)
 
-proc glyphDataRange*(f: SfntFont, gid: uint32): tuple[ok: bool, off,
-    len: int] =
-  ## Byte range of the `glyf` data for `gid`, or ok=false when the font
-  ## has no glyf table or the id is out of range. Empty glyphs report
-  ## len 0.
-  let (ok, starts, ends) = f.cachedGlyphOffsets()
-  if not ok or int(gid) >= starts.len:
-    return (false, 0, 0)
-  let s = starts[int(gid)]
-  let e = ends[int(gid)]
-  if e < s:
-    return (false, 0, 0)
-  (true, s, e - s)
-
 proc drawGlyf(f: SfntFont, gid: uint32,
     cb: proc(op: DrawOp) {.closure.},
     coords: seq[float32] = @[]): bool =
   # Emits a TrueType outline with variation tuning.
-  let (ok, starts, ends) = f.cachedGlyphOffsets()
-  if not ok or int(gid) >= starts.len:
+  let cache = f.glyphOffsetCache()
+  let (ok, off, len) = cache.glyphDataRange(gid)
+  if not ok or len < 10:
     return false
-  let s = starts[int(gid)]
-  let e = ends[int(gid)]
-  if e - s < 10:
-    return false
-  proc at(id: uint32): tuple[ok: bool, off: int,
-      len: int] {.closure.} =
-    if int(id) >= starts.len:
-      (false, 0, 0)
-    else:
-      (true, starts[int(id)], ends[int(id)] - starts[int(id)])
-  drawGlyfGlyph(f.bytes, s, e - s, at, cb, gid, f.gvarContextFor(coords))
+  proc at(id: uint32): tuple[ok: bool, off: int, len: int] {.closure.} =
+    cache.glyphDataRange(id)
+  drawGlyfGlyph(f.bytes, off, len, at, cb, gid, f.gvarContextFor(coords))
 
 proc drawCff(f: SfntFont, gid: uint32,
     cb: proc(op: DrawOp) {.closure.},

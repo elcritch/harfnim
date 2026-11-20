@@ -1071,9 +1071,8 @@ proc gposLookupCount*(gpos: GposData): int =
     return 0
   gpos.lookups.len
 
-proc getGposLookup*(gpos: GposData, idx: int): PosLookup =
-  ## Returns the parsed lookup, parsing and caching on first use when
-  ## the table was built lazily via `parseGpos`.
+proc gposLookup*(gpos: GposData, idx: int): lent PosLookup =
+  ## Borrows a lookup from the fixed-size cache, parsing it on first use.
   if gpos.offsets.len == 0 or gpos.parsed[idx]:
     return gpos.lookups[idx]
   let lk =
@@ -1083,7 +1082,11 @@ proc getGposLookup*(gpos: GposData, idx: int): PosLookup =
       emptyPosLookup()
   gpos.lookups[idx] = lk
   gpos.parsed[idx] = true
-  lk
+  gpos.lookups[idx]
+
+proc getGposLookup*(gpos: GposData, idx: int): PosLookup =
+  ## Returns an owned copy of the parsed lookup.
+  gposLookup(gpos, idx)
 
 proc parseGposTable*(bytes: openArray[uint8], off: int): GposData =
   ## Parses the full GPOS table eagerly.

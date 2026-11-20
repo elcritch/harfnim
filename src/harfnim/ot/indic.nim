@@ -298,7 +298,7 @@ proc lookupWouldSubstitute(gsub: GsubData, lookup: Lookup,
     of lkLigature:
       if e.index >= lookup.ligatureSubsts.len:
         continue
-      let sub = lookup.ligatureSubsts[e.index]
+      let sub {.cursor.} = lookup.ligatureSubsts[e.index]
       let ci = sub.coverage.coverageIndexRaw(glyphs[0])
       if ci < 0 or ci >= sub.sets.len:
         continue
@@ -314,7 +314,7 @@ proc lookupWouldSubstitute(gsub: GsubData, lookup: Lookup,
     of lkContext:
       if e.index >= lookup.contextSubsts.len:
         continue
-      let sub = lookup.contextSubsts[e.index]
+      let sub {.cursor.} = lookup.contextSubsts[e.index]
       if sub.format == 1u16 or sub.format == 4u16:
         let ci = sub.coverage.coverageIndexRaw(glyphs[0])
         if ci < 0 or ci >= sub.ruleSets.len:
@@ -355,7 +355,7 @@ proc lookupWouldSubstitute(gsub: GsubData, lookup: Lookup,
     of lkChain:
       if e.index >= lookup.chainSubsts.len:
         continue
-      let sub = lookup.chainSubsts[e.index]
+      let sub {.cursor.} = lookup.chainSubsts[e.index]
       if sub.format == 1u16 or sub.format == 4u16:
         let ci = sub.coverage.coverageIndexRaw(glyphs[0])
         if ci < 0 or ci >= sub.ruleSets.len:
@@ -401,7 +401,7 @@ proc lookupWouldSubstitute(gsub: GsubData, lookup: Lookup,
     of lkReverse:
       if e.index >= lookup.reverseSubsts.len:
         continue
-      let sub = lookup.reverseSubsts[e.index]
+      let sub {.cursor.} = lookup.reverseSubsts[e.index]
       if glyphs.len == 1 and sub.coverage.covers(glyphs[0]) and
           (not zeroContext or
           (sub.backtrackCoverages.len == 0 and
@@ -415,7 +415,7 @@ proc featureWouldSubstitute(gsub: GsubData, lookups: openArray[uint16],
     glyphs: openArray[uint32], zeroContext: bool): bool =
   for li in lookups:
     if int(li) < gsubLookupCount(gsub) and lookupWouldSubstitute(gsub,
-        getGsubLookup(gsub, int(li)), glyphs, zeroContext):
+        gsubLookup(gsub, int(li)), glyphs, zeroContext):
       return true
   false
 
