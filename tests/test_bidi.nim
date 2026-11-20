@@ -134,3 +134,30 @@ test "rtl base with latin text":
   check v.runs.len == 1
   check v.runs[0].level == 2
   check v.runs[0].dir == dirLeftToRight
+
+test "bracket overflow aborts pair processing":
+  # 63 simultaneous opens still pair: the closes take the pair
+  # direction (odd level, L4 mirrored). The 64th open aborts every
+  # pair, so the closes fall through to N1/N2 with the trailing
+  # space and stay even (unmirrored).
+  proc nest(n: int): string =
+    result = "א "
+    for _ in 0 ..< n:
+      result.add('(')
+    result.add("ב")
+    for _ in 0 ..< n:
+      result.add(')')
+    result.add(" c")
+  let vf = visualRuns(nest(2), bdLtr)
+  check vf.runs.len == 2
+  check vf.runs[0].level == 1
+  check vf.runs[1].level == 0
+  check vf.text[0 .. 1] == "(("
+  let ve = visualRuns(nest(63), bdLtr)
+  check ve.runs.len == 2
+  check ve.text[0 .. 1] == "(("
+  let vm = visualRuns(nest(64), bdLtr)
+  check vm.runs.len == 2
+  check vm.runs[0].level == 1
+  check vm.runs[1].level == 0
+  check vm.text[0 .. 2] == "ב)"
