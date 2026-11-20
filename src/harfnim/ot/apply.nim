@@ -85,7 +85,7 @@ proc lookupCovers(lookup: Lookup, gid: uint32): bool =
       if lookup.ligatureSubsts[e.index].coverage.covers(gid):
         return true
     of lkContext:
-      let sub = lookup.contextSubsts[e.index]
+      let sub {.cursor.} = lookup.contextSubsts[e.index]
       if sub.format == 1u16 or sub.format == 2u16 or sub.format == 4u16 or
           sub.format == 5u16:
         if sub.coverage.covers(gid):
@@ -94,7 +94,7 @@ proc lookupCovers(lookup: Lookup, gid: uint32): bool =
         if sub.coverages.len > 0 and sub.coverages[0].covers(gid):
           return true
     of lkChain:
-      let sub = lookup.chainSubsts[e.index]
+      let sub {.cursor.} = lookup.chainSubsts[e.index]
       if sub.format == 1u16 or sub.format == 2u16 or sub.format == 4u16 or
           sub.format == 5u16:
         if sub.coverage.covers(gid):
@@ -162,7 +162,7 @@ proc applyMultiple(buf: var Buffer, sub: MultipleSubst, index: int): bool =
   # Applies one multiple substitution.
   if index < 0 or index >= sub.sequences.len:
     return false
-  let s = sub.sequences[index]
+  let s {.cursor.} = sub.sequences[index]
   case s.len
   of 0:
     buf.deleteGlyph()
@@ -193,7 +193,7 @@ proc applyAlternate(buf: var Buffer, sub: AlternateSubst, index: int,
     lookupMask: uint32): bool =
   if index < 0 or index >= sub.sets.len:
     return false
-  let alts = sub.sets[index]
+  let alts {.cursor.} = sub.sets[index]
   if alts.len == 0:
     return false
   let cur = buf.cur(0)
@@ -637,7 +637,7 @@ proc applyNestedAt(buf: var Buffer, gsub: GsubData, lookupIndex: int,
     return false
   if buf.idx < 0 or buf.idx >= buf.len or buf.idx >= buf.info.len:
     return false
-  let lookup = getGsubLookup(gsub, lookupIndex)
+  let lookup {.cursor.} = gsubLookup(gsub, lookupIndex)
   if lookup.order.len == 0:
     return false
   let nestedProps = lookup.lookupProps()
@@ -645,7 +645,7 @@ proc applyNestedAt(buf: var Buffer, gsub: GsubData, lookupIndex: int,
   for e in lookup.order:
     case e.kind
     of lkSingle:
-      let sub = lookup.singleSubsts[e.index]
+      let sub {.cursor.} = lookup.singleSubsts[e.index]
       let ci = sub.coverage.coverageIndexRaw(gid)
       if ci < 0:
         continue
@@ -655,21 +655,21 @@ proc applyNestedAt(buf: var Buffer, gsub: GsubData, lookupIndex: int,
       replaceWithSubstituted(buf, rep.get)
       return true
     of lkMultiple:
-      let sub = lookup.multipleSubsts[e.index]
+      let sub {.cursor.} = lookup.multipleSubsts[e.index]
       let ci = sub.coverage.coverageIndexRaw(gid)
       if ci < 0:
         continue
       if applyMultiple(buf, sub, ci):
         return true
     of lkAlternate:
-      let sub = lookup.alternateSubsts[e.index]
+      let sub {.cursor.} = lookup.alternateSubsts[e.index]
       let ci = sub.coverage.coverageIndexRaw(gid)
       if ci < 0:
         continue
       if applyAlternate(buf, sub, ci, parentMask):
         return true
     of lkLigature:
-      let sub = lookup.ligatureSubsts[e.index]
+      let sub {.cursor.} = lookup.ligatureSubsts[e.index]
       let ci = sub.coverage.coverageIndexRaw(gid)
       if ci < 0 or ci >= sub.sets.len:
         continue
@@ -714,7 +714,7 @@ proc applyLookup*(buf: var Buffer, gsub: GsubData, lookup: Lookup,
     for e in lookup.order:
       case e.kind
       of lkSingle:
-        let sub = lookup.singleSubsts[e.index]
+        let sub {.cursor.} = lookup.singleSubsts[e.index]
         let ci = sub.coverage.coverageIndexRaw(gid)
         if ci < 0:
           continue
@@ -725,7 +725,7 @@ proc applyLookup*(buf: var Buffer, gsub: GsubData, lookup: Lookup,
         done = true
         break
       of lkMultiple:
-        let sub = lookup.multipleSubsts[e.index]
+        let sub {.cursor.} = lookup.multipleSubsts[e.index]
         let ci = sub.coverage.coverageIndexRaw(gid)
         if ci < 0:
           continue
@@ -733,7 +733,7 @@ proc applyLookup*(buf: var Buffer, gsub: GsubData, lookup: Lookup,
           done = true
           break
       of lkAlternate:
-        let sub = lookup.alternateSubsts[e.index]
+        let sub {.cursor.} = lookup.alternateSubsts[e.index]
         let ci = sub.coverage.coverageIndexRaw(gid)
         if ci < 0:
           continue
@@ -741,7 +741,7 @@ proc applyLookup*(buf: var Buffer, gsub: GsubData, lookup: Lookup,
           done = true
           break
       of lkLigature:
-        let sub = lookup.ligatureSubsts[e.index]
+        let sub {.cursor.} = lookup.ligatureSubsts[e.index]
         let ci = sub.coverage.coverageIndexRaw(gid)
         if ci < 0 or ci >= sub.sets.len:
           continue
@@ -777,7 +777,7 @@ proc applySubstLookups*(buf: var Buffer, gsub: GsubData,
   for li in lookupIndices:
     if int(li) >= gsubLookupCount(gsub):
       continue
-    let lookup = getGsubLookup(gsub, int(li))
+    let lookup {.cursor.} = gsubLookup(gsub, int(li))
     if lookup.order.len == 0:
       continue
     if lookup.isReverse:
@@ -833,16 +833,17 @@ proc posLookupCovers(lookup: PosLookup, gid: uint32): bool =
     of pkCursive:
       if lookup.cursivePos[e.index].coverage.covers(gid):
         return true
-    of pkMarkBase, pkMarkMark:
-      let sub = if e.kind == pkMarkBase: lookup.markBasePos[e.index]
-        else: lookup.markMarkPos[e.index]
-      if sub.markCoverage.covers(gid):
+    of pkMarkBase:
+      if lookup.markBasePos[e.index].markCoverage.covers(gid):
+        return true
+    of pkMarkMark:
+      if lookup.markMarkPos[e.index].markCoverage.covers(gid):
         return true
     of pkMarkLig:
       if lookup.markLigPos[e.index].markCoverage.covers(gid):
         return true
     of pkContext:
-      let sub = lookup.contextPos[e.index]
+      let sub {.cursor.} = lookup.contextPos[e.index]
       if sub.format == 1u16 or sub.format == 2u16 or sub.format == 4u16 or
           sub.format == 5u16:
         if sub.coverage.covers(gid):
@@ -851,7 +852,7 @@ proc posLookupCovers(lookup: PosLookup, gid: uint32): bool =
         if sub.coverages.len > 0 and sub.coverages[0].covers(gid):
           return true
     of pkChain:
-      let sub = lookup.chainPos[e.index]
+      let sub {.cursor.} = lookup.chainPos[e.index]
       if sub.format == 1u16 or sub.format == 2u16 or sub.format == 4u16 or
           sub.format == 5u16:
         if sub.coverage.covers(gid):
@@ -971,7 +972,7 @@ proc applyPairPos(buf: var Buffer, sub: PairPos, props, mask: uint32,
     let covIdx = sub.coverage.coverageIndexRaw(first)
     if covIdx >= sub.pairSets.len:
       return false
-    let set = sub.pairSets[covIdx]
+    let set {.cursor.} = sub.pairSets[covIdx]
     for i, s in set.seconds:
       if s == second:
         let (v1, v2) = set.values[i]
@@ -1460,7 +1461,7 @@ proc applyNestedPosAt(buf: var Buffer, gpos: GposData, lookupIndex: int,
     return false
   if buf.idx < 0 or buf.idx >= buf.len or buf.idx >= buf.info.len:
     return false
-  let lookup = getGposLookup(gpos, lookupIndex)
+  let lookup {.cursor.} = gposLookup(gpos, lookupIndex)
   if lookup.order.len == 0:
     return false
   let nestedProps = lookup.lookupProps()
@@ -1735,7 +1736,7 @@ proc applyPosLookups*(buf: var Buffer, gpos: GposData,
   for li in lookupIndices:
     if int(li) >= gposLookupCount(gpos):
       continue
-    let lookup = getGposLookup(gpos, int(li))
+    let lookup {.cursor.} = gposLookup(gpos, int(li))
     if lookup.order.len == 0:
       continue
     buf.idx = 0

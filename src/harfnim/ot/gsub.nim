@@ -1223,10 +1223,8 @@ proc gsubLookupCount*(gsub: GsubData): int =
     return 0
   gsub.lookups.len
 
-proc getGsubLookup*(gsub: GsubData, idx: int): Lookup =
-  ## Returns the parsed lookup, parsing and caching on first use when
-  ## the table was built lazily via `parseGsub`. The table is a ref so
-  ## the cache fills through value copies without `var` threading.
+proc gsubLookup*(gsub: GsubData, idx: int): lent Lookup =
+  ## Borrows a lookup from the fixed-size cache, parsing it on first use.
   if gsub.offsets.len == 0 or gsub.parsed[idx]:
     return gsub.lookups[idx]
   let lk =
@@ -1236,7 +1234,11 @@ proc getGsubLookup*(gsub: GsubData, idx: int): Lookup =
       emptyLookup()
   gsub.lookups[idx] = lk
   gsub.parsed[idx] = true
-  lk
+  gsub.lookups[idx]
+
+proc getGsubLookup*(gsub: GsubData, idx: int): Lookup =
+  ## Returns an owned copy of the parsed lookup.
+  gsubLookup(gsub, idx)
 
 proc parseGsubTable*(bytes: openArray[uint8], off: int): GsubData =
   ## Parses the full GSUB table eagerly.
