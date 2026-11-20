@@ -1,10 +1,10 @@
 ## Shaper dispatch: script-to-shaper routing and shared predicates.
 ##
-## Ports the `categorize` routing from harfrust `ot/shaper/mod.rs`.
-## Only Arabic and Hebrew have dedicated behavior so far; the Indic,
-## Khmer, Myanmar, Thai, Hangul, and USE kinds are returned so future
-## commits can attach shaping behavior without changing call sites
-## (until then they shape through the default path).
+## Ports the `categorize` routing from harfrust `ot/shaper/mod.rs`
+## plus the preferred script-tag resolution (`all_tags_from_script`):
+## Indic scripts and Myanmar resolve to their current-spec xxx2 tags
+## (with xxx3 tried first, routing Indic xxx3 fonts to USE) before
+## falling back to the old tag and DFLT.
 
 import std/options
 
@@ -36,6 +36,63 @@ proc gsubScriptTagFor*(gsub: GsubData, scriptTag: Tag): Option[Tag] =
     if s.tag == dflt:
       return some(fromU32(s.tag))
   none(Tag)
+
+proc newTagFor*(script: Script): Option[Tag] =
+  ## Current-spec OT script tag (xxx2) for the nine Indic scripts
+  ## plus Myanmar, mirroring harfrust `new_tag_from_script`. Others
+  ## have no new tag.
+  if script == Bengali:
+    some(tagFromStr("bng2"))
+  elif script == Devanagari:
+    some(tagFromStr("dev2"))
+  elif script == Gujarati:
+    some(tagFromStr("gjr2"))
+  elif script == Gurmukhi:
+    some(tagFromStr("gur2"))
+  elif script == Kannada:
+    some(tagFromStr("knd2"))
+  elif script == Malayalam:
+    some(tagFromStr("mlm2"))
+  elif script == Oriya:
+    some(tagFromStr("ory2"))
+  elif script == Tamil:
+    some(tagFromStr("tml2"))
+  elif script == Telugu:
+    some(tagFromStr("tel2"))
+  elif script == Myanmar:
+    some(tagFromStr("mym2"))
+  else:
+    none(Tag)
+
+proc preferredScriptTags*(script: Script, oldTag: Tag): seq[Tag] =
+  ## OpenType script tags from most to least preferred, mirroring
+  ## harfrust `all_tags_from_script`: the xxx3 variant (except
+  ## Myanmar, which has no xxx3), then xxx2, then the old tag.
+  result = @[]
+  let nt = newTagFor(script)
+  if nt.isSome:
+    if nt.get != tagFromStr("mym2"):
+      var b3 = nt.get.toU32()
+      b3 = (b3 and 0xFFFFFF00u32) or 0x33u32
+      result.add(fromU32(b3))
+    result.add(nt.get)
+  result.add(oldTag)
+
+proc chooseGsubScript*(gsub: GsubData, script: Option[Script],
+    oldTag: Tag): Tag =
+  ## Resolves the shaping script tag against the font: the first
+  ## preferred tag present in GSUB, else DFLT when present, else the
+  ## old tag (preserving the previous no-table behaviour).
+  if script.isSome:
+    for t in preferredScriptTags(script.get, oldTag):
+      for s in gsub.scripts:
+        if s.tag == t.toU32():
+          return t
+  let dflt = defaultScriptTag()
+  for s in gsub.scripts:
+    if s.tag == dflt.toU32():
+      return dflt
+  oldTag
 
 proc isDfltOrLatn(t: Tag): bool =
   # True for DFLT or latn script records.

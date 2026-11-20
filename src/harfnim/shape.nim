@@ -3,9 +3,10 @@
 ## Mirrors harfrust shape.rs / ot/layout.rs. Arabic joining, fallback
 ## presentation forms (unicode and win1256), Hebrew composition and mark
 ## reorder, Hangul jamo composition, Thai SARA AM split and PUA fallback,
-## Indic consonant-syllable reordering, mark/cursive GPOS, and fallback
-## mark positioning are implemented; khmer, myanmar, USE and syllabic
-## shapers plus stch stretching stay TODO.
+## Indic consonant-syllable reordering, Khmer Coeng/Ro pref reordering,
+## Myanmar reph positioning, USE repha/pref recording and post-base
+## reordering, mark/cursive GPOS, and fallback mark positioning are
+## implemented; stch stretching stays TODO.
 
 import std/options
 
@@ -24,10 +25,13 @@ import ./ot/gsub
 import ./ot/hangul
 import ./ot/hebrew
 import ./ot/indic
+import ./ot/khmer
 import ./ot/map
 import ./ot/maskbits
+import ./ot/myanmar
 import ./ot/shaper
 import ./ot/thai
+import ./ot/use
 
 export buffer
 export feature
@@ -549,9 +553,15 @@ proc fallbackPositionMarks*(buf: var Buffer, sf: ShaperFont) =
 
 proc shapePlan*(font: ShaperFont, buf: var Buffer,
     features: openArray[Feature]): ShapePlan =
-  ## Guesses segment properties and builds a plan.
+  ## Guesses segment properties and builds a plan. The script tag
+  ## prefers the current-spec xxx2 tag (xxx3 first) when the font
+  ## carries it, mirroring harfrust script resolution.
   buf.guessSegmentProperties()
-  newShapePlan(scriptTagForBuffer(buf), langTagForBuffer(buf), features)
+  var scriptTag = scriptTagForBuffer(buf)
+  let gsubOpt = font.cachedGsub()
+  if gsubOpt.isSome and buf.script.isSome:
+    scriptTag = chooseGsubScript(gsubOpt.get, buf.script, scriptTag)
+  newShapePlan(scriptTag, langTagForBuffer(buf), features)
 
 proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
   ## Shapes with a prebuilt plan.
@@ -588,7 +598,7 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
     if gsubOpt.isSome:
       hasThaiGsub = gsubHasThai(gsubOpt.get)
     buf.preprocessThai(sf, hasThaiGsub)
-  if shaper == skIndic:
+  if shaper == skIndic or shaper == skUse:
     # Vowel-constraint splits happen on codepoints, pre-normalize.
     buf.preprocessVowelConstraints()
   var nctx = sf.normalizeContextFor()
@@ -601,9 +611,15 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
   if shaper == skIndic:
     nctx.decomposeFn = indicDecompose
     nctx.composeFn = indicCompose
+  if shaper == skKhmer:
+    nctx.decomposeFn = khmerDecompose
+    nctx.composeFn = khmerCompose
+  if shaper == skUse:
+    nctx.composeFn = useCompose
   let nmMode =
     if shaper == skHangul: nmNone
-    elif shaper == skIndic: nmComposedDiacriticsNoShortCircuit
+    elif shaper == skIndic or shaper == skKhmer or shaper == skMyanmar or
+        shaper == skUse: nmComposedDiacriticsNoShortCircuit
     else: nmComposedDiacritics
   buf.normalize(nmMode, hasGposMark, nctx)
   buf.deallocateUnicodeVars()
@@ -625,6 +641,16 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
   if shaper == skIndic:
     # Syllabic categories attach on codepoints, before glyph mapping.
     buf.setupIndicProperties()
+  if shaper == skKhmer:
+    # Khmer categories attach on codepoints, before glyph mapping.
+    buf.setupKhmerProperties()
+  if shaper == skMyanmar:
+    # Myanmar categories attach on codepoints, before glyph mapping.
+    buf.setupMyanmarProperties()
+  if shaper == skUse:
+    # USE categories attach on codepoints, before glyph mapping.
+    for i in 0 ..< min(buf.len, buf.info.len):
+      buf.info[i].setUseCategory(useGetCategory(int(buf.info[i].glyphId)))
   buf.mapGlyphsFast()
   buf.setContentType(some(contentGlyphs))
   buf.allocateGsubGposVars()
@@ -648,6 +674,27 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
         plan.langTag, buf.script)
       buf.applyIndicGsub(sf, gsubOpt.get, plan.scriptTag, plan.langTag,
         plan.features, indicPlan)
+    else:
+      buf.clearSyllables()
+  elif shaper == skKhmer:
+    if gsubOpt.isSome:
+      var khmerPlan = newKhmerShapePlan(gsubOpt.get, plan.scriptTag,
+        plan.langTag)
+      buf.applyKhmerGsub(sf, gsubOpt.get, plan.scriptTag, plan.langTag,
+        plan.features, khmerPlan)
+    else:
+      buf.clearSyllables()
+  elif shaper == skMyanmar:
+    if gsubOpt.isSome:
+      buf.applyMyanmarGsub(sf, gsubOpt.get, plan.scriptTag,
+        plan.langTag, plan.features)
+    else:
+      buf.clearSyllables()
+  elif shaper == skUse:
+    if gsubOpt.isSome:
+      var usePlan = newUseShapePlan()
+      buf.applyUseGsub(sf, gsubOpt.get, plan.scriptTag, plan.langTag,
+        plan.features, usePlan)
     else:
       buf.clearSyllables()
   else:
@@ -692,10 +739,12 @@ proc shapeWithPlan*(font: ShaperFont, buf: var Buffer, plan: ShapePlan) =
         kernRan = true
   # Fallback mark positioning runs only when neither GPOS nor legacy
   # kern positioning applied, mirroring harfrust position_by_plan
-  # (adjust_mark_positioning_when_zeroing). The Thai and Indic shapers
-  # (like the other syllabic shapers) opt out of fallback positioning.
+  # (adjust_mark_positioning_when_zeroing). The Thai, Indic, Khmer,
+  # Myanmar, and USE shapers (like the other syllabic shapers) opt out
+  # of fallback positioning.
   let fallbackAllowed = not gposOpt.isSome and shaper != skThai and
-    shaper != skIndic and (not kernRan or not hasCrossKern)
+    shaper != skIndic and shaper != skKhmer and shaper != skMyanmar and
+    shaper != skUse and (not kernRan or not hasCrossKern)
   # Late mark zeroing (arabic/hebrew/default) when GPOS did not attach.
   if (buf.scratchFlags and ScratchFlagHasGposAttachment) == 0u32:
     buf.zeroMarkWidths(buf.direction.isForward())

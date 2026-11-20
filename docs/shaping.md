@@ -35,9 +35,12 @@ GSUB script to a `ShaperKind`:
 * Hangul: Hangul shaper.
 * Hebrew: Hebrew shaper.
 * Indic family: Indic shaper unless the font only targets DFLT or latn
-  (then default), with `xxx3` scripts routed to USE.
-* Khmer, Myanmar, and the long USE list: dedicated kinds (most still
-  shape through shared or default paths; see roadmap).
+  (then default), with `xxx3` scripts routed to USE. Script tags prefer
+  the current-spec `xxx2` form (`xxx3` first) when the font carries it.
+* Khmer: Khmer shaper (Coeng/Ro pref, left-matra moves, split-matras).
+* Myanmar: Myanmar shaper for `mym2` fonts (`mymr`/DFLT stay default).
+* The long USE list: USE shaper unless the font only targets DFLT
+  or latn (then default).
 * Everything else: default shaper.
 
 `gposHasMark` gates Hebrew composition on GPOS mark support.
@@ -51,7 +54,7 @@ GSUB script to a `ShaperKind`:
 * Legacy `kern` runs after GPOS when requested and GPOS supplied no kern
   for the script.
 * Fallback mark positioning runs only when neither GPOS nor legacy kern
-  positioned, and Thai and Indic opt out.
+  positioned, and Thai, Indic, Khmer, Myanmar, and USE opt out.
 * Marks without GPOS attachment still get zero advances; RTL buffers
   reverse at the end.
 
@@ -60,7 +63,8 @@ GSUB script to a `ShaperKind`:
 * Arabic: ordered joining features with joining aware masks, Unicode and
   win1256 fallback presentation forms, mark reordering.
 * Hangul: jamo masks plus ljmo, vjmo, tjmo, and calt handling.
-* Indic: full staged applier (see [Complex shapers](shapers.md)).
+* Indic, Khmer, Myanmar, USE: full staged appliers
+  (see [Complex shapers](shapers.md)).
 * Hebrew, Thai: preprocessing and reorder hooks before or during GSUB.
 
 ## Reading results

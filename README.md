@@ -111,7 +111,9 @@ them with `clue task examples` (see `examples/README.md`).
 * [x] Hangul shaper (LV/LVT composition, jamo features, tone reorder)
 * [x] Thai/Lao shaper (SARA AM split, PUA fallback shaping)
 * [x] Indic consonant-syllable shaper (reordering, staged features)
-* [ ] Khmer, Myanmar, USE shapers (syllabic core is shared)
+* [x] Khmer shaper (Coeng/Ro pref, left matras, split matras)
+* [x] Myanmar shaper (reph positioning, pre-base matras; mym2)
+* [x] USE shaper (reph/pref recording, post-base reordering)
 * [ ] MVAR metrics
 * [ ] AAT morx
 * [ ] stch stretching

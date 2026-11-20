@@ -70,9 +70,8 @@ Entry point `src/harfnim.nim` reexports the public modules.
 
 Done: buffer, Unicode, normalize, SFNT, GSUB 1 to 8, GPOS single, pair,
 mark, cursive, contextual and chained, wide 24 bit formats, Arabic,
-Hebrew, Hangul, Thai and Lao, Indic, legacy kern, outlines, CFF and CFF2,
-variations (fvar, avar, gvar, HVAR, VVAR, GDEF deltas), cmap 14, win1256
-fallback, hr-shape CLI, conformance harness.
+Hebrew, Hangul, Thai and Lao, Indic, Khmer, Myanmar, USE, legacy kern,
+outlines, CFF and CFF2, variations (fvar, avar, gvar, HVAR, VVAR, GDEF
+deltas), cmap 14, win1256 fallback, hr-shape CLI, conformance harness.
 
-Open: Khmer, Myanmar, USE shapers (syllabic core is shared), MVAR
-metrics, AAT morx, stch stretching.
+Open: MVAR metrics, AAT morx, stch stretching.

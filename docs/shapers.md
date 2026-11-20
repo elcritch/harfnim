@@ -48,15 +48,44 @@
 
 ## Shared syllabic core
 
-* `src/harfnim/ot/syllabic.nim`: dotted circle insertion, syllable reset.
-* `src/harfnim/ot/vowel_constraints.nim`: splits for 9 Indic scripts.
+* `src/harfnim/ot/syllabic.nim`: dotted circle insertion, over-long
+  syllable cut recording, syllable reset.
+* `src/harfnim/ot/vowel_constraints.nim`: splits for 9 Indic scripts
+  plus Sinhala, Brahmi, Khojki, Khudawadi, Tirhuta, Modi, Takri, with
+  default-ignorable transparency.
 * `src/harfnim/ot/indic_table.nim`: categories, positions, packed trie.
 * `src/harfnim/ot/indic_machine.nim` plus `indic_machine_data.nim`:
   Ragel syllable finder interpreter and tables.
-* Khmer, Myanmar, and USE reuse this core; their full shapers are open.
+* `src/harfnim/ot/khmer_machine.nim` plus `khmer_machine_data.nim`:
+  Khmer syllable finder with the linear-time joiner-run guard.
+* `src/harfnim/ot/myanmar_machine.nim` plus
+  `myanmar_machine_data.nim`: Myanmar syllable finder.
+* `src/harfnim/ot/use_machine.nim` plus `use_machine_data.nim` and
+  `src/harfnim/ot/use_table.nim`: USE syllable finder and categories.
+
+## Khmer
+
+* `src/harfnim/ot/khmer.nim`: Coeng+Ro pref moves with cfar marking,
+  left-matra moves, split-matra decompose/compose hooks, locl/ccmp/
+  clig, five basic stages, four other stages after clearing syllables.
+  `liga` is disabled per the Khmer override.
+
+## Myanmar
+
+* `src/harfnim/ot/myanmar.nim`: Ra+As+H reph handling, pre-base matra
+  positioning, four basic features in order, four other features after
+  clearing syllables. Legacy `mymr` fonts stay on the default path;
+  the shaper engages for `mym2`.
+
+## USE
+
+* `src/harfnim/ot/use.nim`: rphf and topographical mask setup, locl/
+  ccmp/nukt/akhn, rphf with repha recording, pref with VPre
+  recording, seven basic features, repha and pre-base reordering,
+  topographical and other features after clearing syllables.
 
 ## Status
 
-Done: Arabic, Hebrew, Hangul, Thai and Lao, Indic.
-Open: Khmer, Myanmar, USE (machines and tables staged, shaper wiring
-remains), plus stch stretching.
+Done: Arabic, Hebrew, Hangul, Thai and Lao, Indic, Khmer, Myanmar,
+USE.
+Open: MVAR metrics, AAT morx, stch stretching.
