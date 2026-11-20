@@ -1,4 +1,4 @@
-## Item variation store and delta-set index maps (HVAR/VVAR).
+## Item variation store and delta-set index maps (HVAR/VVAR/MVAR).
 ##
 ## Parses the shared `ItemVariationStore` (regions + delta sets) and
 ## the per-glyph `DeltaSetIndexMap`s that HVAR/VVAR use for advance
@@ -26,6 +26,9 @@ type
     ## Variation regions.
     datas*: seq[VarData]
     ## Variation data blocks.
+
+  MvarRecord* = tuple[tag: uint32, outer, inner: uint16]
+    ## One MVAR value record: metric tag plus delta-set indexes.
 
   DeltaSetIndexMap* = object
     ## Delta set index mapping.

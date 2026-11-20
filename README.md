@@ -119,7 +119,7 @@ them with `clue task examples` (see `examples/README.md`).
 * [x] Khmer shaper (Coeng/Ro pref, left matras, split matras)
 * [x] Myanmar shaper (reph positioning, pre-base matras; mym2)
 * [x] USE shaper (reph/pref recording, post-base reordering)
-* [ ] MVAR metrics
+* [x] MVAR metrics (hhea/vhea ascender, descender, line gap)
 * [ ] AAT morx
 * [ ] stch stretching
 

@@ -5,6 +5,7 @@ import ./draw
 import ./normalize
 import ./scale
 import ./sfnt
+import ./tag
 import ./variations
 import ./ot/gpos
 import ./ot/gsub
@@ -150,6 +151,31 @@ proc vAdvance*(f: ShaperFont, gid: GlyphId): int32 =
     f.font.vAdvanceDelta(gid.value, f.varCoords)
   let v = f.scale.clampYAdvance(f.scale.scaleY(base))
   if v == low(int32): high(int32) else: -v
+
+proc hMetrics*(f: ShaperFont): tuple[ascender, descender, lineGap: int32] =
+  ## Scaled horizontal metrics with MVAR deltas at the variation
+  ## location.
+  let c = f.varCoords
+  let asc = f.font.hheaAscender() +
+    f.font.mvarDelta(tagFromStr("hasc").toU32(), c)
+  let desc = f.font.hheaDescender() +
+    f.font.mvarDelta(tagFromStr("hdsc").toU32(), c)
+  let gap = f.font.hheaLineGap() +
+    f.font.mvarDelta(tagFromStr("hlgp").toU32(), c)
+  (f.scale.scaleY(asc), f.scale.scaleY(desc), f.scale.scaleY(gap))
+
+proc vMetrics*(f: ShaperFont): tuple[ascender, descender, lineGap: int32] =
+  ## Scaled vertical metrics with MVAR deltas; zeros without vhea.
+  if not f.font.hasVMetrics:
+    return (0i32, 0i32, 0i32)
+  let c = f.varCoords
+  let asc = f.font.vheaAscender() +
+    f.font.mvarDelta(tagFromStr("vasc").toU32(), c)
+  let desc = f.font.vheaDescender() +
+    f.font.mvarDelta(tagFromStr("vdsc").toU32(), c)
+  let gap = f.font.vheaLineGap() +
+    f.font.mvarDelta(tagFromStr("vlgp").toU32(), c)
+  (f.scale.scaleY(asc), f.scale.scaleY(desc), f.scale.scaleY(gap))
 
 proc drawGlyph*(f: ShaperFont, gid: GlyphId,
     cb: proc(op: DrawOp) {.closure.}): bool =

@@ -91,6 +91,10 @@ type
     ## Vertical advance variation store.
     vvarAdvMap*: DeltaSetIndexMap
     ## Vertical advance index map.
+    mvarStore*: VarStore
+    ## Metrics variation store.
+    mvarRecords*: seq[MvarRecord]
+    ## Metrics value records (tag plus delta-set indexes).
     gdefVarStore*: VarStore
     ## GDEF item variation store.
     locaCache*: LocaCache
@@ -133,6 +137,7 @@ const
   TagGvar = 0x67766172u32
   TagHvar = 0x48564152u32
   TagVvar = 0x56564152u32
+  TagMvar = 0x4D564152u32
   TagGdef = 0x47444546u32
 
 proc checkBounds(bytes: openArray[uint8], off, size: int) =
@@ -613,6 +618,23 @@ proc parseFontData(bytes: seq[uint8], faceIndex: int): SfntFont =
     if advOff != 0 and result.vvarStore.ok:
       result.vvarAdvMap = parseDeltaSetIndexMap(bytes,
         vvar.offset + advOff, vvar.len - advOff)
+  let mvar = result.tableData(TagMvar)
+  if mvar.ok and mvar.len >= 14 and
+      readU16(bytes, mvar.offset) == 1u16:
+    let recSize = int(readU16(bytes, mvar.offset + 6))
+    let recCount = int(readU16(bytes, mvar.offset + 8))
+    let storeOff = int(readU32(bytes, mvar.offset + 10))
+    let recBase = mvar.offset + 14
+    if recSize >= 8 and recCount >= 0 and
+        recBase + recCount * recSize <= mvar.offset + mvar.len and
+        recBase + recCount * recSize <= bytes.len:
+      for i in 0 ..< recCount:
+        let r = recBase + i * recSize
+        result.mvarRecords.add((tag: readU32(bytes, r),
+          outer: readU16(bytes, r + 4), inner: readU16(bytes, r + 6)))
+    if storeOff != 0:
+      result.mvarStore = parseItemVariationStore(bytes,
+        mvar.offset + storeOff, mvar.len - storeOff)
   # GDEF 1.3+: the ItemVariationStore that GPOS VariationIndex
   # tables reference. Earlier versions and malformed tables leave an
   # empty store (contained); shaping then behaves statically.
@@ -845,6 +867,60 @@ proc vAdvance*(f: SfntFont, gid: uint32): int32 =
           return int32(u16be(f.bytes, vmtx.offset + g * 4))
         return int32(u16be(f.bytes, vmtx.offset + (n - 1) * 4))
   int32(f.unitsPerEm)
+
+proc hheaMetric(f: SfntFont, at: int): int32 =
+  # Reads one hhea int16 field; hhea is required, so a short table
+  # only happens on corrupt input that still parsed.
+  let hhea = f.tableData(TagHhea)
+  if not hhea.ok or hhea.len < 36 or hhea.offset + at + 2 > f.bytes.len:
+    return 0i32
+  int32(readI16(f.bytes, hhea.offset + at))
+
+proc hheaAscender*(f: SfntFont): int32 =
+  ## Horizontal ascender in font units.
+  f.hheaMetric(4)
+
+proc hheaDescender*(f: SfntFont): int32 =
+  ## Horizontal descender in font units.
+  f.hheaMetric(6)
+
+proc hheaLineGap*(f: SfntFont): int32 =
+  ## Horizontal line gap in font units.
+  f.hheaMetric(8)
+
+proc vheaMetric(f: SfntFont, at: int): int32 =
+  # Reads one vhea int16 field, 0 when the font has no vhea table.
+  if not f.hasVMetrics:
+    return 0i32
+  let vhea = f.tableData(TagVhea)
+  if not vhea.ok or vhea.len < 36 or vhea.offset + at + 2 > f.bytes.len:
+    return 0i32
+  int32(readI16(f.bytes, vhea.offset + at))
+
+proc vheaAscender*(f: SfntFont): int32 =
+  ## Vertical ascender in font units, 0 without vhea.
+  f.vheaMetric(4)
+
+proc vheaDescender*(f: SfntFont): int32 =
+  ## Vertical descender in font units, 0 without vhea.
+  f.vheaMetric(6)
+
+proc vheaLineGap*(f: SfntFont): int32 =
+  ## Vertical line gap in font units, 0 without vhea.
+  f.vheaMetric(8)
+
+proc mvarDelta*(f: SfntFont, tag: uint32,
+    coords: seq[float32]): int32 =
+  ## MVAR metric adjustment for the tag at normalized coordinates; 0
+  ## when the font has no usable MVAR data, the tag is absent, or the
+  ## location is empty.
+  if coords.len == 0:
+    return 0i32
+  for r in f.mvarRecords:
+    if r.tag == tag:
+      return deltaFor(f.mvarStore,
+        (uint32(r.outer) shl 16) or uint32(r.inner), coords)
+  0i32
 
 proc glyphOffsets(f: SfntFont): tuple[ok: bool, starts, ends: seq[int]] =
   # Reads raw loca offsets for all glyphs.

@@ -6,15 +6,15 @@
 
 * Table directory (`TableEntry` list), `unitsPerEm`, glyph and metrics counts.
 * `cmap` offsets including format 14, names, fvar axes, avar maps.
-* HVAR, VVAR, and GDEF variation stores and delta maps.
+* HVAR, VVAR, MVAR, and GDEF variation stores and delta maps.
 * `locaCache` for glyph offsets.
 
 Parsing raises only `FontError` (`src/harfnim/error.nim`). Malformed
 subtables generally skip the subtable instead of failing the table.
 
 Key procs: `parseFont`, `tableData`, `mapUnicode`, `mapUnicodeVariant`,
-`hAdvance`, `vAdvance`, advance deltas, `glyphBoundsUnscaled`,
-`drawGlyph`.
+`hAdvance`, `vAdvance`, advance deltas, `mvarDelta`, hhea/vhea readers,
+`glyphBoundsUnscaled`, `drawGlyph`.
 
 ## ShaperFont (`src/harfnim/font.nim`)
 
@@ -49,6 +49,8 @@ Includes clamping helpers used by the positioning path.
 * `varstore.nim`: item variation store, `DeltaSetIndexMap`, scalar support.
 * `gvar.nim`: glyph outline deltas with phantom handling.
 * HVAR and VVAR advance deltas; GDEF store deltas for GPOS `ValueRecord`.
+* MVAR value records plus `mvarDelta`; `hMetrics`/`vMetrics` expose the
+  varied, scaled hhea/vhea ascender, descender, and line gap.
 * `setVariations` replaces the outline cache handle so copies keep
   correct per location caches.
 
