@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="920" viewBox="0 0 1280 920" font-family="Helvetica, Arial, sans-serif">
+<defs>
+<marker id="arrInk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22223b"/></marker>
+<marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d00000"/></marker>
+<marker id="arrGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a9d8f"/></marker>
+<marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4361ee"/></marker>
+<marker id="arrOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e36414"/></marker>
+<marker id="arrCluster" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff8500"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="920" fill="#ffffff"/>
+<text x="48" y="44" font-size="30" fill="#22223b" text-anchor="start" font-weight="bold">Khmer: the vowel leaps ahead, Coeng dives below</text>
+<text x="48" y="70" font-size="15" fill="#8d99ae" text-anchor="start">Khmer Sangam MN at 300px shapes five codepoints into 4 glyphs: script=Khmr direction=ltr</text>
+<text x="90" y="122" font-size="16" fill="#22223b" text-anchor="start" font-weight="bold">logical order (codepoints, byte offsets)</text>
+<rect x="340" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="395" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+1781</text>
+<text x="395" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 0</text>
+<rect x="460" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="515" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+17D2</text>
+<text x="515" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 3</text>
+<rect x="580" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="635" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+1798</text>
+<text x="635" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 6</text>
+<rect x="700" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="755" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+17C2</text>
+<text x="755" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 9</text>
+<rect x="820" y="140" width="110" height="70" fill="#ffffff" stroke="#8d99ae" stroke-width="1.5"/>
+<text x="875" y="170" font-size="15" fill="#22223b" text-anchor="middle">U+179A</text>
+<text x="875" y="192" font-size="12" fill="#8d99ae" text-anchor="middle">byte 12</text>
+<text x="90" y="300" font-size="16" fill="#22223b" text-anchor="start" font-weight="bold">shaped visual order (vowel, base, fused below, Ro)</text>
+<line x1="90" y1="620" x2="1190" y2="620" stroke="#d00000" stroke-width="2"/>
+<rect x="449" y="353" width="89" height="267" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M484.5 392.1 Q476.6 392.1 476.6 397.1 Q476.6 398.8 477.6 400.1 Q478.7 401.4 480.4 402.3 Q482.1 403.2 484.2 403.6 Q486.4 403.9 488.6 403.9 Q494.7 403.9 499.3 402.0 Q503.9 400.1 507.0 397.1 Q510.1 393.8 511.6 389.9 Q513.2 385.8 513.2 381.5 Q513.2 373.5 507.8 370.8 Q502.5 368.0 492.2 368.0 L494.9 353.0 Q505.6 353.0 513.0 355.0 Q520.5 356.9 525.2 360.6 Q530.0 364.2 532.1 369.5 Q534.3 374.6 534.3 381.2 Q534.3 388.0 531.5 394.7 Q528.7 401.4 523.3 406.9 Q517.9 412.3 509.8 415.7 Q501.9 419.0 491.6 419.0 Q486.5 419.0 480.7 418.3 Q474.8 417.4 469.8 415.1 Q465.0 412.6 461.8 408.3 Q458.5 404.1 458.5 397.1 Q458.5 389.6 464.7 384.9 Q470.8 380.1 481.4 380.1 L486.5 380.1 Z M503.4 600.5 Q511.4 596.9 516.0 591.6 Q520.6 586.3 520.6 578.5 Q520.6 575.5 519.2 573.9 Q517.9 572.2 515.8 571.5 Q513.9 570.8 511.9 570.6 Q509.9 570.5 508.6 570.5 L508.6 552.5 L514.9 552.5 Q518.7 552.5 522.7 553.9 Q526.6 555.3 529.9 558.0 Q533.1 560.7 535.1 564.9 Q537.2 569.0 537.2 574.7 Q537.2 584.6 532.4 592.9 Q527.7 601.1 520.6 607.3 Q513.6 613.3 505.6 616.6 Q497.5 620 491.1 620 L482.3 620 L482.3 500.0 L449.0 468.8 L449.0 457.1 L494.9 425.0 L519.2 447.7 L529.4 440.6 L529.4 452.9 L510.8 465.5 L490.8 446.6 L468.8 461.9 L503.4 494.0 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="437" cy="620" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="437" y1="686" x2="558" y2="686" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<rect x="582" y="426" width="126" height="196" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M582.0 576.2 Q582.0 565.4 586.6 557.6 Q591.1 549.8 598.4 544.1 Q605.8 538.4 615.1 534.2 Q624.7 529.9 634.5 526.1 Q644.4 522.1 653.8 518.2 Q663.3 514.1 670.6 508.7 Q678.0 503.3 682.5 495.9 Q687.1 488.6 687.1 478.3 Q687.1 470.9 684.1 464.4 Q681.2 458.0 675.6 453.3 Q670.2 448.5 662.4 445.8 Q654.7 443.0 645.0 443.0 Q634.6 443.0 626.7 446.3 Q618.9 449.5 613.7 455.1 Q608.4 460.6 605.6 468.1 Q603.0 475.6 603.0 484.1 L603.0 509.6 Q605.6 509.3 608.2 508.2 Q610.9 507.1 612.9 505.4 Q615.0 503.8 616.2 502.1 Q617.5 500.2 617.5 498.3 Q617.5 496.5 616.9 495.5 Q616.3 494.5 615.4 494.0 Q614.5 493.6 613.5 493.6 Q612.5 493.4 611.8 493.4 L608.4 493.4 L608.4 475.4 L617.5 475.4 Q620.7 475.4 623.6 476.7 Q626.7 477.9 628.9 480.3 Q631.2 482.6 632.6 486.1 Q633.9 489.5 633.9 494.0 Q633.9 502.7 629.6 509.4 Q625.4 516 619.1 520.5 Q612.9 525.1 605.8 527.4 Q598.7 529.8 593.2 529.8 L582.0 529.8 L582.0 483.8 Q582.0 470.6 586.9 459.7 Q591.8 448.9 600.5 441.3 Q609.1 433.5 620.8 429.3 Q632.7 425.0 646.5 425.0 Q660.2 425.0 671.5 429.1 Q683.0 433.2 691.0 440.6 Q699.2 447.7 703.6 457.5 Q708 467.2 708 478.3 Q708 490.8 703.5 499.7 Q698.9 508.7 691.6 515.3 Q684.3 521.9 674.7 526.7 Q665.4 531.5 655.4 535.5 Q645.6 539.4 636.1 543.4 Q626.7 547.2 619.4 551.9 Q612.1 556.6 607.5 562.9 Q603.0 569.0 603.0 577.7 Q603.0 582.2 604.9 587.0 Q606.8 591.9 611.2 596.0 Q615.6 599.9 622.9 602.6 Q630.4 605.1 641.3 605.1 Q652.3 605.1 660.8 601.8 Q669.5 598.5 675.2 592.9 Q681.0 587.2 684.0 579.6 Q687.1 572.0 687.1 563.3 L687.1 552.5 L708 538.1 L708 564.2 Q708 577.5 703.0 588.4 Q698.2 599.2 689.4 607.0 Q680.6 614.6 668.3 618.8 Q656.1 622.9 641.3 622.9 Q626.6 622.9 615.4 619.6 Q604.4 616.0 597.0 609.9 Q589.5 603.6 585.7 595.1 Q582.0 586.5 582.0 576.2 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="558" cy="620" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="558" y1="686" x2="738" y2="686" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<path d="M645.0 630.3 L665.9 630.3 L665.9 666.1 Q674.9 666.3 681.5 668.6 Q688.0 671.1 692.4 675.4 Q696.8 679.6 699.0 685.3 Q701.1 691.0 701.1 697.6 Q701.1 704.7 698.9 710.2 Q696.5 715.9 692.6 719.9 Q688.6 723.9 683.2 725.9 Q677.8 728.0 671.3 728.0 Q665.8 728.0 660.9 726.1 Q656.1 724.2 652.6 720.0 Q649.1 716.1 647.0 709.8 Q645.0 703.6 645.0 695 L645.0 687.8 Q639.0 691.5 633.0 695.9 Q627.0 700.3 620.7 704.1 Q614.4 707.9 607.8 710.4 Q601.0 713.0 594.0 713.0 Q586.4 713.0 580.2 710.7 Q573.9 708.5 569.5 704.2 Q565.1 700.0 562.8 693.8 Q560.5 687.7 560.5 679.8 L579.9 679.8 Q579.9 695 594.0 695 Q601.0 695 607.5 692.4 Q613.8 689.7 619.9 685.9 Q626.1 682.3 632.2 678.2 Q638.4 674.1 645.0 671.0 Z M674.1 708.8 Q678.8 708.8 681.0 704.7 Q683.1 700.7 683.1 693.2 Q683.1 690.6 682.3 688.1 Q681.5 685.8 679.7 683.9 Q677.9 682.1 675.0 680.9 Q672.1 679.8 667.8 679.8 L665.9 679.8 L665.9 697.1 Q665.9 702.2 668.0 705.4 Q670.0 708.8 674.1 708.8 Z " fill="#fff3e6" stroke="#ff8500" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="738" cy="620" r="4" fill="#ff8500" stroke="#ffffff" stroke-width="2"/>
+<text x="793" y="682" font-size="14" fill="#ff8500" text-anchor="middle">adv 0</text>
+<rect x="758" y="426" width="82" height="194" fill="none" stroke="#8338ec" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M792.1 500.0 L758.7 468.8 L758.7 457.1 L804.7 425.0 L829.0 447.7 L839.1 440.6 L839.1 452.9 L820.5 465.5 L800.4 446.6 L778.4 461.9 L813 494.0 L813 620 L804.4 620 Q800.0 620 794.8 618.5 Q789.7 616.9 784.6 614.1 Q779.5 611.2 774.6 607.3 Q769.9 603.2 766.1 598.2 Q762.5 593.0 760.3 587.2 Q758.1 581.2 758.1 574.7 Q758.1 569.0 760.1 564.9 Q762.2 560.7 765.4 558.0 Q768.6 555.3 772.6 553.9 Q776.5 552.5 780.3 552.5 L786.6 552.5 L786.6 570.5 Q785.3 570.5 783.3 570.6 Q781.4 570.8 779.3 571.5 Q777.4 572.2 775.9 573.9 Q774.6 575.5 774.6 578.5 Q774.6 586.3 779.2 591.6 Q783.8 596.9 792.1 600.5 Z " fill="#eef1ff" stroke="#22223b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="738" cy="620" r="5" fill="#4361ee" stroke="#ffffff" stroke-width="2"/>
+<line x1="738" y1="686" x2="843" y2="686" stroke="#2a9d8f" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+<text x="497.5" y="712" font-size="13" fill="#22223b" text-anchor="middle">gid 180</text>
+<text x="497.5" y="732" font-size="13" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<text x="648" y="712" font-size="13" fill="#22223b" text-anchor="middle">gid 115</text>
+<text x="648" y="732" font-size="13" fill="#ff8500" text-anchor="middle">cluster 0</text>
+<text x="790.5" y="712" font-size="13" fill="#22223b" text-anchor="middle">gid 140</text>
+<text x="790.5" y="732" font-size="13" fill="#ff8500" text-anchor="middle">cluster 12</text>
+<line x1="395" y1="210" x2="648" y2="420" stroke="#ff8500" stroke-width="1.5"/>
+<line x1="515" y1="210" x2="738" y2="420" stroke="#ff8500" stroke-width="1.5"/>
+<line x1="635" y1="210" x2="738" y2="420" stroke="#ff8500" stroke-width="1.5"/>
+<line x1="755" y1="210" x2="497.5" y2="420" stroke="#ff8500" stroke-width="1.5"/>
+<line x1="875" y1="210" x2="790.5" y2="420" stroke="#ff8500" stroke-width="1.5"/>
+<text x="90" y="800" font-size="14" fill="#22223b" text-anchor="start">AE (gid 180) jumps before KHA while COENG and MO merge into gid 252 below the baseline; RO never moves.</text>
+<text x="90" y="822" font-size="14" fill="#22223b" text-anchor="start">Clusters 0 and 12 survive the reorder, so hit testing maps back to logical text.</text>
+<text x="48" y="898" font-size="13" fill="#8d99ae" text-anchor="start">The Khmer shaper reorders the left vowel first, then fuses Coeng pairs with pref and below-base forms.</text>
+</svg>

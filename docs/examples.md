@@ -1,7 +1,7 @@
 # Example posters
 
-The `examples/` directory holds six Nim programs that shape real text
-and draw the result as fixed size SVG guides. Open the SVGs in a
+The `examples/` directory holds fourteen Nim programs that shape real
+text and draw the result as fixed size SVG guides. Open the SVGs in a
 browser: glyph outlines are stroked and big, and every shaping decision
 carries a labeled guide. Regenerate them with `clue task examples`
 (see `examples/README.md`).
@@ -104,3 +104,28 @@ normalization equivalence as posters 8 and 9. Bottom: the word
 "logos" with kern off (gray) vs on (ink); the lamda pair tightens and
 word-final sigma takes its final form while clusters stay in logical
 order.
+
+## 12. Khmer (`ex12_khmer`, 1280x920)
+
+Shapes "Khmae" (KHA, COENG, MO, VS AE, RO) with Khmer Sangam MN. The
+top strip is logical order with codepoint and byte labels; the bottom
+strip is shaped visual order. The left vowel leaps before the base,
+COENG plus MO fuse into a zero advance below-base form, and final RO
+keeps cluster 12. Orange connectors cross where the reorder moved
+glyphs, and clusters 0 and 12 survive for hit testing.
+
+## 13. Myanmar (`ex13_myanmar`, 1280x880)
+
+Shapes RA plus ASAT plus VIRAMA plus KA with Myanmar Sangam MN. The
+three codepoint reph moves after its base consonant and fuses into a
+zero advance form, so two visual glyphs carry clusters 9 and 0 in
+reverse. The converging connectors show three codepoints collapsing
+into one glyph while KA holds its byte offset.
+
+## 14. USE (`ex14_use`, 1280x880)
+
+Shapes SHA plus VIRAMA plus RA plus II (no ZWJ) with Sinhala Sangam
+MN. Four codepoints shape to two ligatures inside one USE syllable:
+SHA plus VIRAMA fuse and RA plus II fuse, with clusters 0 and 6. No
+reorder happens here; the poster shows syllable aware ligation
+applying across the whole cluster.

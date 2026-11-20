@@ -1,6 +1,6 @@
 # Shaping example posters
 
-Eleven Nim programs that shape real text with harfnim and draw the
+Fourteen Nim programs that shape real text with harfnim and draw the
 result as fixed size SVG guides with big stroked glyph outlines. Each
 poster uses an explicit canvas width and height, a big pixel size,
 stroked outlines, and labeled guides (baselines, origins, advances,
@@ -21,6 +21,12 @@ clusters, run bands) plus a short info panel.
 | `ex09_thai.nim` | `out/ex09_thai.svg` (1280x880) | SARA AM split; identical gid streams |
 | `ex10_hangul.nim` | `out/ex10_hangul.svg` (1280x800) | Jamo compose to precomposed gid |
 | `ex11_greek.nim` | `out/ex11_greek.svg` (1280x960) | Tonos equivalence; "logos" kerned with final sigma |
+| `ex12_khmer.nim` | `out/ex12_khmer.svg` (1280x920) | Khmer vowel leap; Coeng plus Mo fuse below |
+| `ex13_myanmar.nim` | `out/ex13_myanmar.svg` (1280x880) | Myanmar reph sinks below the base |
+| `ex14_use.nim` | `out/ex14_use.svg` (1280x880) | USE Sinhala syllable in two ligatures |
+| `ex12_khmer.nim` | `out/ex12_khmer.svg` (1280x920) | Khmer vowel leap; Coeng plus Mo fuse below |
+| `ex13_myanmar.nim` | `out/ex13_myanmar.svg` (1280x880) | Myanmar reph sinks below the base |
+| `ex14_use.nim` | `out/ex14_use.svg` (1280x880) | USE Sinhala syllable in two ligatures |
 
 `support.nim` holds the shared pieces: host font discovery, shaping
 shortcuts, font unit to pixel transforms, outline to SVG path
@@ -28,14 +34,17 @@ conversion, and the canvas builder.
 
 ## Fonts
 
-Posters 1, 2, and 4 to 6 shape with a host font. `findDemoFont` picks
+Most posters shape with a host font. `findDemoFont` picks
 the first usable file from a candidate list (Arial preferred, then
 Times New Roman, Geneva, DejaVu, Liberation). All numbers on the
 posters (advances, deltas, offsets, glyph ids) are measured at
 generation time, so they stay correct if the host font version
-changes. Poster 3 builds a tiny synthetic TTF in memory (blocky f, i,
+changes. Posters 3 builds a tiny synthetic TTF in memory (blocky f, i,
 and fi glyphs with a GSUB type 4 ligature lookup), following the same
-no binary fixtures rule as the test suite.
+no binary fixtures rule as the test suite. Poster 9 needs Ayuthaya,
+poster 10 AppleGothic or AppleMyungjo, poster 12 Khmer Sangam MN,
+poster 13 Myanmar Sangam MN, and poster 14 Sinhala Sangam MN; the rest
+shape with the `findDemoFont` host font.
 
 ## Regenerate
 
@@ -45,7 +54,7 @@ Build and run each poster (output lands in `examples/out/`):
 clue build examples/ex01_anatomy.nim --out:/tmp/ex01 && /tmp/ex01
 ```
 
-Or regenerate all six at once with the nimble task:
+Or regenerate all fourteen at once with the nimble task:
 
 ```sh
 clue task examples
