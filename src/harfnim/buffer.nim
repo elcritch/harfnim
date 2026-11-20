@@ -1687,7 +1687,11 @@ proc setGlyphFlagsImpl*(b: var Buffer, mask: uint32, start, stop: int,
       else:
         cluster = b.infosFindMinCluster(b.info, start, b.outLen, some(cluster))
       let ol = b.outLen
-      b.infosSetGlyphFlags(true, start, ol, cluster, mask)
+      if b.haveSeparateOutput:
+        b.infosSetGlyphFlags(true, start, ol, cluster, mask)
+      else:
+        # Output aliases input storage; flag the input range directly.
+        b.infosSetGlyphFlags(false, start, ol, cluster, mask)
       b.infosSetGlyphFlags(false, b.idx, stop, cluster, mask)
 
 proc infosFindMinCluster*(b: Buffer, infos: seq[GlyphInfo], start, stop: int,
