@@ -91,6 +91,8 @@ them with `clue task examples` (see `examples/README.md`).
 | **Khmer.** AE leaps before KHA; COENG plus MO fuse below; RO keeps cluster 12. | <img src="examples/out/ex12_khmer.svg" width="640"> |
 | **Myanmar.** The reph sinks below the base; clusters 9 and 0 in reverse. | <img src="examples/out/ex13_myanmar.svg" width="640"> |
 | **USE.** One Sinhala syllable shapes to two ligatures, clusters 0 and 6. | <img src="examples/out/ex14_use.svg" width="640"> |
+| **Japanese.** Dakuten equivalence; kanji plus hiragana word in full ems. | <img src="examples/out/ex15_japanese.svg" width="640"> |
+| **Chinese.** Four full em han; Latin around han with byte clusters. | <img src="examples/out/ex16_chinese.svg" width="640"> |
 
 ## Roadmap
 * [x] Buffer, Unicode, normalize pipeline

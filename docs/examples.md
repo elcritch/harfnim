@@ -1,6 +1,6 @@
 # Example posters
 
-The `examples/` directory holds fourteen Nim programs that shape real
+The `examples/` directory holds sixteen Nim programs that shape real
 text and draw the result as fixed size SVG guides. Open the SVGs in a
 browser: glyph outlines are stroked and big, and every shaping decision
 carries a labeled guide. Regenerate them with `clue task examples`
@@ -129,3 +129,20 @@ MN. Four codepoints shape to two ligatures inside one USE syllable:
 SHA plus VIRAMA fuse and RA plus II fuse, with clusters 0 and 6. No
 reorder happens here; the poster shows syllable aware ligation
 applying across the whole cluster.
+
+## 15. Japanese (`ex15_japanese`, 1280x1000)
+
+Top: HA plus combining voiced mark (U+306F U+3099) and precomposed
+BA (U+3070) shape to the identical glyph with Hiragino Sans GB, the
+same normalization equivalence as posters 8, 9, and 11. Bottom: the
+word "taberu" (kanji TA plus hiragana BE RU) shapes to three full em
+glyphs with byte clusters 0, 3, and 6. Kanji sets the verb root,
+hiragana sets the inflection, and every glyph takes one em.
+
+## 16. Chinese (`ex16_chinese`, 1280x1040)
+
+Top: "ni hao shi jie" shapes to four full em glyphs with Songti SC,
+byte clusters 0, 3, 6, and 9. Bottom: "A" plus two han plus "B"
+mixes proportional Latin advances with full em han; the byte
+clusters 0, 1, 4, and 7 step one byte for Latin, three for han. No
+joining, no ligatures: each han keeps its three byte cluster.

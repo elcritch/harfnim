@@ -1,6 +1,6 @@
 # Shaping example posters
 
-Fourteen Nim programs that shape real text with harfnim and draw the
+Sixteen Nim programs that shape real text with harfnim and draw the
 result as fixed size SVG guides with big stroked glyph outlines. Each
 poster uses an explicit canvas width and height, a big pixel size,
 stroked outlines, and labeled guides (baselines, origins, advances,
@@ -24,9 +24,8 @@ clusters, run bands) plus a short info panel.
 | `ex12_khmer.nim` | `out/ex12_khmer.svg` (1280x920) | Khmer vowel leap; Coeng plus Mo fuse below |
 | `ex13_myanmar.nim` | `out/ex13_myanmar.svg` (1280x880) | Myanmar reph sinks below the base |
 | `ex14_use.nim` | `out/ex14_use.svg` (1280x880) | USE Sinhala syllable in two ligatures |
-| `ex12_khmer.nim` | `out/ex12_khmer.svg` (1280x920) | Khmer vowel leap; Coeng plus Mo fuse below |
-| `ex13_myanmar.nim` | `out/ex13_myanmar.svg` (1280x880) | Myanmar reph sinks below the base |
-| `ex14_use.nim` | `out/ex14_use.svg` (1280x880) | USE Sinhala syllable in two ligatures |
+| `ex15_japanese.nim` | `out/ex15_japanese.svg` (1280x1000) | Dakuten equivalence; kanji plus hiragana word |
+| `ex16_chinese.nim` | `out/ex16_chinese.svg` (1280x1040) | Four full em han; Latin around han |
 
 `support.nim` holds the shared pieces: host font discovery, shaping
 shortcuts, font unit to pixel transforms, outline to SVG path
@@ -43,7 +42,8 @@ changes. Posters 3 builds a tiny synthetic TTF in memory (blocky f, i,
 and fi glyphs with a GSUB type 4 ligature lookup), following the same
 no binary fixtures rule as the test suite. Poster 9 needs Ayuthaya,
 poster 10 AppleGothic or AppleMyungjo, poster 12 Khmer Sangam MN,
-poster 13 Myanmar Sangam MN, and poster 14 Sinhala Sangam MN; the rest
+poster 13 Myanmar Sangam MN, poster 14 Sinhala Sangam MN, poster 15
+Hiragino Sans GB, and poster 16 Songti SC; the rest
 shape with the `findDemoFont` host font.
 
 ## Regenerate
@@ -54,7 +54,7 @@ Build and run each poster (output lands in `examples/out/`):
 clue build examples/ex01_anatomy.nim --out:/tmp/ex01 && /tmp/ex01
 ```
 
-Or regenerate all fourteen at once with the nimble task:
+Or regenerate all sixteen at once with the nimble task:
 
 ```sh
 clue task examples
